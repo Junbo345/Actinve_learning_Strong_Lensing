@@ -9,18 +9,15 @@
 
 
 #### Workspace setup ####
-library(opendatatoronto)
+library(WDI)
 library(tidyverse)
-# [...UPDATE THIS...]
-
 #### Download data ####
-# [...ADD CODE HERE TO DOWNLOAD...]
-
+data_Mortality <- WDI(indicator = "SH.DYN.MORT", start = 2022, end = 2022)
+data_Food <- WDI(indicator = "AG.PRD.FOOD.XD", start = 2022, end = 2022)
 
 
 #### Save data ####
-# [...UPDATE THIS...]
-# change the_raw_data to whatever name you assigned when you downloaded it.
-write_csv(the_raw_data, "inputs/data/raw_data.csv") 
+write_csv(data_Food, "data/01-raw_data/raw_data_Food.csv") 
+write_csv(data_Mortality, "data/01-raw_data/raw_data_Mortality.csv") 
 
          

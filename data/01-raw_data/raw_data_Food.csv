@@ -1,0 +1,267 @@
+country,iso2c,iso3c,year,AG.PRD.FOOD.XD
+Africa Eastern and Southern,ZH,AFE,2022,NA
+Africa Western and Central,ZI,AFW,2022,NA
+Arab World,1A,ARB,2022,NA
+Caribbean small states,S3,CSS,2022,NA
+Central Europe and the Baltics,B8,CEB,2022,NA
+Early-demographic dividend,V2,EAR,2022,NA
+East Asia & Pacific,Z4,EAS,2022,NA
+East Asia & Pacific (excluding high income),4E,EAP,2022,NA
+East Asia & Pacific (IDA & IBRD countries),T4,TEA,2022,NA
+Euro area,XC,EMU,2022,NA
+Europe & Central Asia,Z7,ECS,2022,NA
+Europe & Central Asia (excluding high income),7E,ECA,2022,NA
+Europe & Central Asia (IDA & IBRD countries),T7,TEC,2022,NA
+European Union,EU,EUU,2022,NA
+Fragile and conflict affected situations,F1,FCS,2022,NA
+Heavily indebted poor countries (HIPC),XE,HPC,2022,NA
+High income,XD,,2022,NA
+IBRD only,XF,IBD,2022,NA
+IDA & IBRD total,ZT,IBT,2022,NA
+IDA blend,XH,IDB,2022,NA
+IDA only,XI,IDX,2022,NA
+IDA total,XG,IDA,2022,NA
+Late-demographic dividend,V3,LTE,2022,NA
+Latin America & Caribbean,ZJ,LCN,2022,NA
+Latin America & Caribbean (excluding high income),XJ,LAC,2022,NA
+Latin America & the Caribbean (IDA & IBRD countries),T2,TLA,2022,NA
+Least developed countries: UN classification,XL,LDC,2022,NA
+Low & middle income,XO,LMY,2022,NA
+Low income,XM,,2022,NA
+Lower middle income,XN,,2022,NA
+Middle East & North Africa,ZQ,MEA,2022,NA
+Middle East & North Africa (excluding high income),XQ,MNA,2022,NA
+Middle East & North Africa (IDA & IBRD countries),T3,TMN,2022,NA
+Middle income,XP,MIC,2022,NA
+North America,XU,NAC,2022,NA
+Not classified,XY,,2022,NA
+OECD members,OE,OED,2022,NA
+Other small states,S4,OSS,2022,NA
+Pacific island small states,S2,PSS,2022,NA
+Post-demographic dividend,V4,PST,2022,NA
+Pre-demographic dividend,V1,PRE,2022,NA
+Small states,S1,SST,2022,NA
+South Asia,8S,SAS,2022,NA
+South Asia (IDA & IBRD),T5,TSA,2022,NA
+Sub-Saharan Africa,ZG,SSF,2022,NA
+Sub-Saharan Africa (excluding high income),ZF,SSA,2022,NA
+Sub-Saharan Africa (IDA & IBRD countries),T6,TSS,2022,NA
+Upper middle income,XT,,2022,NA
+World,1W,WLD,2022,NA
+Afghanistan,AF,AFG,2022,111.43
+Albania,AL,ALB,2022,105.4
+Algeria,DZ,DZA,2022,111.22
+American Samoa,AS,ASM,2022,NA
+Andorra,AD,AND,2022,NA
+Angola,AO,AGO,2022,124.09
+Antigua and Barbuda,AG,ATG,2022,89.95
+Argentina,AR,ARG,2022,109.39
+Armenia,AM,ARM,2022,83.87
+Aruba,AW,ABW,2022,NA
+Australia,AU,AUS,2022,112.1
+Austria,AT,AUT,2022,100.45
+Azerbaijan,AZ,AZE,2022,129.02
+"Bahamas, The",BS,BHS,2022,99.17
+Bahrain,BH,BHR,2022,129.17
+Bangladesh,BD,BGD,2022,125.2
+Barbados,BB,BRB,2022,102.71
+Belarus,BY,BLR,2022,102.53
+Belgium,BE,BEL,2022,100
+Belize,BZ,BLZ,2022,102.28
+Benin,BJ,BEN,2022,126.25
+Bermuda,BM,BMU,2022,NA
+Bhutan,BT,BTN,2022,77.75
+Bolivia,BO,BOL,2022,115.45
+Bosnia and Herzegovina,BA,BIH,2022,113.39
+Botswana,BW,BWA,2022,96.87
+Brazil,BR,BRA,2022,113.77
+British Virgin Islands,VG,VGB,2022,NA
+Brunei Darussalam,BN,BRN,2022,119.3
+Bulgaria,BG,BGR,2022,100.74
+Burkina Faso,BF,BFA,2022,118.84
+Burundi,BI,BDI,2022,119.15
+Cabo Verde,CV,CPV,2022,74.78
+Cambodia,KH,KHM,2022,123.74
+Cameroon,CM,CMR,2022,107.84
+Canada,CA,CAN,2022,111.63
+Cayman Islands,KY,CYM,2022,NA
+Central African Republic,CF,CAF,2022,147.99
+Chad,TD,TCD,2022,130.28
+Channel Islands,JG,CHI,2022,NA
+Chile,CL,CHL,2022,105.36
+China,CN,CHN,2022,111.75
+Colombia,CO,COL,2022,110.64
+Comoros,KM,COM,2022,106.65
+"Congo, Dem. Rep.",CD,COD,2022,122.79
+"Congo, Rep.",CG,COG,2022,106.13
+Costa Rica,CR,CRI,2022,100.36
+Cote d'Ivoire,CI,CIV,2022,121.86
+Croatia,HR,HRV,2022,89.5
+Cuba,CU,CUB,2022,71.39
+Curacao,CW,CUW,2022,NA
+Cyprus,CY,CYP,2022,108.71
+Czechia,CZ,CZE,2022,97.66
+Denmark,DK,DNK,2022,103.83
+Djibouti,DJ,DJI,2022,133
+Dominica,DM,DMA,2022,100.85
+Dominican Republic,DO,DOM,2022,127.89
+Ecuador,EC,ECU,2022,98.86
+"Egypt, Arab Rep.",EG,EGY,2022,109.07
+El Salvador,SV,SLV,2022,102.68
+Equatorial Guinea,GQ,GNQ,2022,103.43
+Eritrea,ER,ERI,2022,106.08
+Estonia,EE,EST,2022,105.65
+Eswatini,SZ,SWZ,2022,105.96
+Ethiopia,ET,ETH,2022,116.31
+Faroe Islands,FO,FRO,2022,106.62
+Fiji,FJ,FJI,2022,139.65
+Finland,FI,FIN,2022,98.15
+France,FR,FRA,2022,94.02
+French Polynesia,PF,PYF,2022,102.81
+Gabon,GA,GAB,2022,105.76
+"Gambia, The",GM,GMB,2022,71.08
+Georgia,GE,GEO,2022,113.64
+Germany,DE,DEU,2022,92.71
+Ghana,GH,GHA,2022,135.5
+Gibraltar,GI,GIB,2022,NA
+Greece,GR,GRC,2022,102.76
+Greenland,GL,GRL,2022,NA
+Grenada,GD,GRD,2022,86.71
+Guam,GU,GUM,2022,NA
+Guatemala,GT,GTM,2022,107.89
+Guinea,GN,GIN,2022,144.8
+Guinea-Bissau,GW,GNB,2022,122.25
+Guyana,GY,GUY,2022,111.69
+Haiti,HT,HTI,2022,77.85
+Honduras,HN,HND,2022,107
+"Hong Kong SAR, China",HK,HKG,2022,141.66
+Hungary,HU,HUN,2022,74.66
+Iceland,IS,ISL,2022,102.07
+India,IN,IND,2022,127.82
+Indonesia,ID,IDN,2022,117.14
+"Iran, Islamic Rep.",IR,IRN,2022,83.89
+Iraq,IQ,IRQ,2022,106.36
+Ireland,IE,IRL,2022,121.51
+Isle of Man,IM,IMN,2022,NA
+Israel,IL,ISR,2022,105.48
+Italy,IT,ITA,2022,96.97
+Jamaica,JM,JAM,2022,113.26
+Japan,JP,JPN,2022,100.27
+Jordan,JO,JOR,2022,110.25
+Kazakhstan,KZ,KAZ,2022,127.76
+Kenya,KE,KEN,2022,112.38
+Kiribati,KI,KIR,2022,97.32
+"Korea, Dem. People's Rep.",KP,PRK,2022,92.69
+"Korea, Rep.",KR,KOR,2022,101.21
+Kosovo,XK,XKX,2022,NA
+Kuwait,KW,KWT,2022,130.87
+Kyrgyz Republic,KG,KGZ,2022,112.75
+Lao PDR,LA,LAO,2022,114.84
+Latvia,LV,LVA,2022,103.93
+Lebanon,LB,LBN,2022,104.14
+Lesotho,LS,LSO,2022,98.67
+Liberia,LR,LBR,2022,102.67
+Libya,LY,LBY,2022,105.75
+Liechtenstein,LI,LIE,2022,NA
+Lithuania,LT,LTU,2022,99.53
+Luxembourg,LU,LUX,2022,114.89
+"Macao SAR, China",MO,MAC,2022,81.34
+Madagascar,MG,MDG,2022,105.91
+Malawi,MW,MWI,2022,146.13
+Malaysia,MY,MYS,2022,102.8
+Maldives,MV,MDV,2022,94.49
+Mali,ML,MLI,2022,136.03
+Malta,MT,MLT,2022,75.95
+Marshall Islands,MH,MHL,2022,90.84
+Mauritania,MR,MRT,2022,116.51
+Mauritius,MU,MUS,2022,84.4
+Mexico,MX,MEX,2022,117.03
+"Micronesia, Fed. Sts.",FM,FSM,2022,121.63
+Moldova,MD,MDA,2022,89.67
+Monaco,MC,MCO,2022,NA
+Mongolia,MN,MNG,2022,157.87
+Montenegro,ME,MNE,2022,100.56
+Morocco,MA,MAR,2022,106.07
+Mozambique,MZ,MOZ,2022,161.67
+Myanmar,MM,MMR,2022,76.96
+Namibia,NA,NAM,2022,100.53
+Nauru,NR,NRU,2022,99.71
+Nepal,NP,NPL,2022,123.18
+Netherlands,NL,NLD,2022,101
+New Caledonia,NC,NCL,2022,94.76
+New Zealand,NZ,NZL,2022,100.57
+Nicaragua,NI,NIC,2022,127.92
+Niger,NE,NER,2022,132.61
+Nigeria,NG,NGA,2022,119.85
+North Macedonia,MK,MKD,2022,100.68
+Northern Mariana Islands,MP,MNP,2022,NA
+Norway,NO,NOR,2022,102.72
+Oman,OM,OMN,2022,170.06
+Pakistan,PK,PAK,2022,122.43
+Palau,PW,PLW,2022,NA
+Panama,PA,PAN,2022,115.45
+Papua New Guinea,PG,PNG,2022,100.55
+Paraguay,PY,PRY,2022,85.44
+Peru,PE,PER,2022,128.07
+Philippines,PH,PHL,2022,100.51
+Poland,PL,POL,2022,111.71
+Portugal,PT,PRT,2022,110.34
+Puerto Rico,PR,PRI,2022,95.25
+Qatar,QA,QAT,2022,145.71
+Romania,RO,ROU,2022,85.18
+Russian Federation,RU,RUS,2022,126.44
+Rwanda,RW,RWA,2022,117.31
+Samoa,WS,WSM,2022,83.05
+San Marino,SM,SMR,2022,NA
+Sao Tome and Principe,ST,STP,2022,107.25
+Saudi Arabia,SA,SAU,2022,172.66
+Senegal,SN,SEN,2022,177.49
+Serbia,RS,SRB,2022,98.37
+Seychelles,SC,SYC,2022,149.83
+Sierra Leone,SL,SLE,2022,104.72
+Singapore,SG,SGP,2022,131.01
+Sint Maarten (Dutch part),SX,SXM,2022,NA
+Slovak Republic,SK,SVK,2022,86.15
+Slovenia,SI,SVN,2022,94
+Solomon Islands,SB,SLB,2022,100.49
+Somalia,SO,SOM,2022,98.94
+South Africa,ZA,ZAF,2022,113.24
+South Sudan,SS,SSD,2022,114.76
+Spain,ES,ESP,2022,98.83
+Sri Lanka,LK,LKA,2022,99.24
+St. Kitts and Nevis,KN,KNA,2022,115.11
+St. Lucia,LC,LCA,2022,90.59
+St. Martin (French part),MF,MAF,2022,NA
+St. Vincent and the Grenadines,VC,VCT,2022,101.11
+Sudan,SD,SDN,2022,116.41
+Suriname,SR,SUR,2022,87.89
+Sweden,SE,SWE,2022,101.15
+Switzerland,CH,CHE,2022,97.39
+Syrian Arab Republic,SY,SYR,2022,96.98
+Tajikistan,TJ,TJK,2022,150.12
+Tanzania,TZ,TZA,2022,109.9
+Thailand,TH,THA,2022,104.2
+Timor-Leste,TL,TLS,2022,101.69
+Togo,TG,TGO,2022,128.24
+Tonga,TO,TON,2022,97.78
+Trinidad and Tobago,TT,TTO,2022,93.08
+Tunisia,TN,TUN,2022,109.55
+Turkiye,TR,TUR,2022,128.92
+Turkmenistan,TM,TKM,2022,112.03
+Turks and Caicos Islands,TC,TCA,2022,NA
+Tuvalu,TV,TUV,2022,110.82
+Uganda,UG,UGA,2022,135.53
+Ukraine,UA,UKR,2022,87.83
+United Arab Emirates,AE,ARE,2022,124.86
+United Kingdom,GB,GBR,2022,101.24
+United States,US,USA,2022,100.86
+Uruguay,UY,URY,2022,97.82
+Uzbekistan,UZ,UZB,2022,114.43
+Vanuatu,VU,VUT,2022,82.96
+"Venezuela, RB",VE,VEN,2022,89.88
+Viet Nam,VN,VNM,2022,113.65
+Virgin Islands (U.S.),VI,VIR,2022,NA
+West Bank and Gaza,PS,PSE,2022,111.76
+"Yemen, Rep.",YE,YEM,2022,118.29
+Zambia,ZM,ZMB,2022,119.91
+Zimbabwe,ZW,ZWE,2022,121.68
