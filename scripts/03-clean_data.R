@@ -16,16 +16,16 @@ file_paths <- c("file1.csv", "file2.csv", "file3.csv", "file4.csv")
 
 # Read and select columns from each file, renaming the unique column
 file1 <- read.csv('data/01-raw_data/raw_data_Food.csv') %>%
-  select(country, unique_col1 = AG.PRD.FOOD.XD)
+  select(country, Food = AG.PRD.FOOD.XD)
 
-file2 <- read.csv('data/01-raw_data/raw_data_Mortality.csv') %>%
-  select(country, unique_col2 = SH.DYN.MORT)
+file4 <- read.csv('data/01-raw_data/raw_data_Mortality.csv') %>%
+  select(country, Mortality = SH.DYN.MORT)
 
 file3 <- read.csv('data/01-raw_data/raw_data_DPT.csv') %>%
-  select(country, unique_col3 = SH.IMM.IDPT)
+  select(country, Vacinne = SH.IMM.IDPT)
 
-file4 <- read.csv('data/01-raw_data/raw_data_Healthexpense.csv') %>%
-  select(country, unique_col4 = SH.XPD.CHEX.PC.CD)
+file2 <- read.csv('data/01-raw_data/raw_data_Healthexpense.csv') %>%
+  select(country, Health_expense = SH.XPD.CHEX.PC.CD)
 
 # Merge all data frames by 'common_column'
 merged_data <- file1 %>%
