@@ -20,6 +20,8 @@ bibliography: references.bib
 
 library(tidyverse)
 library(palmerpenguins)
+data <- read_csv("data/02-analysis_data/analysis_data.csv")
+
 ```
 
 
@@ -153,6 +155,53 @@ library(rstanarm)
 
 first_model <-
   readRDS(file = here::here("models/first_model.rds"))
+```
+```{r}
+#| echo: false
+#| eval: true
+#| warning: false
+#| message: false
+
+#### Load libraries ####
+library(tidyverse)
+library(rstanarm)
+
+#### Read data ####
+data <- read.csv("data/02-analysis_data/analysis_data.csv")
+
+#### Load the saved model ####
+first_model <- readRDS("models/Mortality_Model.rds")
+
+#### Create predictions based on model ####
+# Get predictions and add them to the dataset
+analysis_data <- data %>%
+  mutate(predicted_mortality = posterior_predict(first_model) %>% apply(2, mean))
+
+#### Plot Mortality vs Food ####
+plot_food <- ggplot(analysis_data, aes(x = Food, y = Mortality)) +
+  geom_point(color = "blue", alpha = 0.6) +
+  geom_line(aes(y = predicted_mortality), color = "red", size = 1) +
+  labs(title = "Mortality vs Food", x = "Food", y = "Mortality")
+
+#### Plot Mortality vs Health Expense ####
+plot_health_expense <- ggplot(analysis_data, aes(x = Health_expense, y = Mortality)) +
+  geom_point(color = "blue", alpha = 0.6) +
+  geom_line(aes(y = predicted_mortality), color = "red", size = 1) +
+  labs(title = "Mortality vs Health Expense", x = "Health Expense", y = "Mortality")
+
+#### Plot Mortality vs Vaccine ####
+plot_vaccine <- ggplot(analysis_data, aes(x = Vacinne, y = Mortality)) +
+  geom_point(color = "blue", alpha = 0.6) +
+  geom_line(aes(y = predicted_mortality), color = "red", size = 1) +
+  labs(title = "Mortality vs Vaccine", x = "Vaccine", y = "Mortality")
+
+#### Save the plots ####
+ggsave("plots/mortality_vs_food.png", plot = plot_food, width = 8, height = 6)
+ggsave("plots/mortality_vs_health_expense.png", plot = plot_health_expense, width = 8, height = 6)
+ggsave("plots/mortality_vs_vaccine.png", plot = plot_vaccine, width = 8, height = 6)
+
+
+```
 ```
 
 ```{r}
