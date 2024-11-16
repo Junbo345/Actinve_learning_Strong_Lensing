@@ -33,7 +33,9 @@ merged_data <- file1 %>%
   left_join(file2, by = "country") %>%
   left_join(file3, by = "country") %>%
   left_join(file4, by = "country") %>%
-  drop_na()
+  drop_na() %>%
+  mutate(Health_expense = log(Health_expense))%>%
+  mutate(Mortality = log(Mortality))
 
 # Save the final merged file
 write_parquet(merged_data, "data/02-analysis_data/analysis_data.parquet")

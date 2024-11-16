@@ -20,7 +20,6 @@ bibliography: references.bib
 
 library(tidyverse)
 library(palmerpenguins)
-data <- read_csv("data/02-analysis_data/analysis_data.csv")
 
 ```
 
@@ -86,15 +85,6 @@ And also planes (@fig-planes). (You can change the height and width, but don't w
 #| echo: false
 #| warning: false
 #| message: false
-
-analysis_data <- read_csv(here::here("data/02-analysis_data/analysis_data.csv"))
-
-analysis_data |> 
-  ggplot(aes(x = width, y = length)) +
-  geom_point(alpha = 0.8) +
-  theme_minimal() +
-  labs(x = "Wing width (mm)",
-       y = "Wing length (mm)")
 ```
 
 Talk way more about it. 
@@ -114,87 +104,91 @@ Use sub-sub-headings for each outcome variable and feel free to combine a few in
 
 # Model
 
-The goal of our modelling strategy is twofold. Firstly,...
+The goal of our modeling strategy is to investigate how the DDT vaccine coverage, food production index, and current health expenditure per capita (current US$) relate to the under-five mortality rate for each nation.
 
-Here we briefly describe the Bayesian analysis model used to investigate... Background details and diagnostics are included in [Appendix -@sec-model-details].
+We aim to use this model to understand how the above mentioned three factors' impact on child mortality and identify opportunities for improving health outcomes, especially for high mortality rate nations. Background details and diagnostics are included in [Appendix -@sec-model-details].
 
 ## Model set-up
 
-Define $y_i$ as the number of seconds that the plane remained aloft. Then $\beta_i$ is the wing width and $\gamma_i$ is the wing length, both measured in millimeters.  
+Let $y_i$ be the logrithm of under-five mortality rate for nation $i$. We define the following predictors:
+
+$x_{1i}$: DDT vaccine coverage for nation $i$.
+$x_{2i}$: Food production index for nation $i$.
+$x_{3i}$: Logrithm of current health expenditure per capita (current US$) for nation $i$.
+The model is specified as:
 
 \begin{align} 
-y_i|\mu_i, \sigma &\sim \mbox{Normal}(\mu_i, \sigma) \\
-\mu_i &= \alpha + \beta_i + \gamma_i\\
-\alpha &\sim \mbox{Normal}(0, 2.5) \\
-\beta &\sim \mbox{Normal}(0, 2.5) \\
-\gamma &\sim \mbox{Normal}(0, 2.5) \\
-\sigma &\sim \mbox{Exponential}(1)
+y_i \mid \mu_i, \sigma &\sim \mbox{Normal}(\mu_i, \sigma) \\
+u_i &= \alpha + \beta_1 x_{1i} + \beta_2 x_{2i} + \beta_3 x_{3i} \\
+\alpha &\sim \mbox{Normal}(5, ) \\
+\beta_1 &\sim \mbox{Normal}(0, 2.5)\\
+\beta_2 &\sim \mbox{Normal}(0, 2.5)\\
+\beta_3 &\sim \mbox{Normal}(0, 2.5)\\
+\sigma &\sim \mbox{Exponential}(1) 
 \end{align}
-
-We run the model in R [@citeR] using the `rstanarm` package of @rstanarm. We use the default priors from `rstanarm`.
+ 
+We implement this model in R [@citeR] using the rstanarm package [@rstanarm], employing its default priors for predictors and a distribution of \mbox{Normal}(\mu_i, \sigma).
 
 
 ### Model justification
 
-We expect a positive relationship between the size of the wings and time spent aloft. In particular...
+We use a multivariate linear model to capture the relationship between the predictors and the response variable. This choice is justified by the linear trends observed in the data (see @sec-data). The logarithmic transformation of the under-five mortality rate and current health expenditure per capita is applied to stabilize variance and linear relationships, ensuring model validity.
 
-We can use maths by including latex between dollar signs, for instance $\theta$.
-
+The Bayesian framework is employed due to its ability to incorporate prior knowledge, improve uncertainty quantification, and handle small sample sizes effectively.
 
 # Results
 
 Our results are summarized in @tbl-modelresults.
 
+###Intercept:
+The intercept estimate of 6.643 represents the expected logarithm of the under-five mortality rate when all predictors are held constant at their reference or baseline values (e.g., average food production, average vaccine coverage, and average health expenditure). This serves as a baseline for interpreting the effects of the predictors.
+
+###Food:
+Food Production Index:
+The coefficient for the food production index is 0.003, indicating a very slight positive relationship between food production and the under-five mortality rate. This naïvely suggests that reducing food production could also reduce mortality, which is counter-intuitive.
+
+However, a closer examination of the confidence interval for this predictor shows that it includes 0. This implies that the relationship is not statistically significant, and food production is not strongly related to overall under-five mortality rates.
+This finding suggests that while food production is essential for societal well-being, its immediate impact on reducing child mortality might depend on other factors such as food access, distribution systems, and nutritional quality.
+
+###Vaccine Coverage:
+The coefficient for vaccine coverage is -0.013, meaning that for every 1 percentage point increase in vaccine coverage, the logarithm of the under-five mortality rate decreases by 1.3%, holding other variables constant.
+
+This highlights the critical role of vaccination programs in reducing child mortality. For example, increasing vaccine coverage by 10 percentage points could reduce the mortality rate by approximately 13%, emphasizing the importance of robust immunization initiatives.
+
+###Health Expenditure (Log-Transformed):
+The coefficient for the log-transformed health expenditure is -0.529, indicating that a 1% increase in health expenditure per capita is associated with a 0.529 unit decrease in the log of the under-five mortality rate, holding all other predictors constant.
+
 ```{r}
 #| echo: false
 #| eval: true
 #| warning: false
 #| message: false
-
-library(rstanarm)
-
-first_model <-
-  readRDS(file = here::here("models/first_model.rds"))
-```
-```{r}
-#| echo: false
-#| eval: true
-#| warning: false
-#| message: false
+#| label: tbl-modelresults
 
 #### Load libraries ####
 library(tidyverse)
 library(rstanarm)
 library(knitr)
-
-#### Read data ####
-data <- read_csv(file = here::here("data/02-analysis_data/analysis_data.csv"))
+library(arrow)
 
 #### Load the saved model ####
-first_model <- readRDS(file = here::here("models/Mortality_Model.rds"))
-summary_table <- summary(first_model)
+# Load the saved models
+model1 <- readRDS(file = here::here("models/Mortality_Model.rds"))
 
-# Display the summary in a formatted table
-kable(summary_table, digits = 2, caption = "Summary of Mortality Model")
-
+# Extract a tidy summary of the model
+model_summary <- broom.mixed::tidy(model1, effects = "fixed", conf.int = TRUE) %>%
+  select(term, estimate, std.error, conf.low, conf.high) %>%
+  rename(
+    Term = term,
+    Estimate = estimate,
+    `Std. Error` = std.error,
+    `2.5% CI` = conf.low,
+    `97.5% CI` = conf.high
+  )
+# Display the summary table
+kable(model_summary, digits = 3)
 
 ```
-```
-
-```{r}
-#| echo: false
-#| eval: true
-#| label: tbl-modelresults
-#| tbl-cap: "Explanatory models of flight time based on wing width and wing length"
-#| warning: false
-
-modelsummary::modelsummary(
-  list(
-    "First model" = first_model
-  ),
-  statistic = "mad",
-  fmt = 2
-)
 ```
 
 
@@ -243,11 +237,13 @@ In @fig-ppcheckandposteriorvsprior-2 we compare the posterior with the prior. Th
 #| fig-cap: "Examining how the model fits, and is affected by, the data"
 #| fig-subcap: ["Posterior prediction check", "Comparing the posterior with the prior"]
 
-pp_check(first_model) +
+analysis_data <- read_parquet(file = here::here("data/02-analysis_data/analysis_data.parquet"))
+
+pp_check(model1) +
   theme_classic() +
   theme(legend.position = "bottom")
 
-posterior_vs_prior(first_model) +
+posterior_vs_prior(model1) +
   theme_minimal() +
   scale_color_brewer(palette = "Set1") +
   theme(legend.position = "bottom") +
@@ -270,9 +266,9 @@ posterior_vs_prior(first_model) +
 #| fig-subcap: ["Trace plot", "Rhat plot"]
 #| layout-ncol: 2
 
-plot(first_model, "trace")
+plot(model1, "trace")
 
-plot(first_model, "rhat")
+plot(model1, "rhat")
 ```
 
 
