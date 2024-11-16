@@ -11,6 +11,7 @@
 # Load the necessary library
 library(dplyr)
 library(tidyverse)
+library(arrow)
 # List of file paths
 file_paths <- c("file1.csv", "file2.csv", "file3.csv", "file4.csv")
 
@@ -35,7 +36,7 @@ merged_data <- file1 %>%
   drop_na()
 
 # Save the final merged file
-write.csv(merged_data, "data/02-analysis_data/analysis_data.csv", row.names = FALSE)
+write_parquet(merged_data, "data/02-analysis_data/analysis_data.parquet")
 
 
 
