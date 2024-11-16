@@ -101,11 +101,6 @@ ggplot(analysis_data, aes(x = Mortality)) +
 
 ```
 
-Talk more about it.
-
-And also planes (@fig-planes). (You can change the height and width, but don't worry about doing that until you have finished every other aspect of the paper - Quarto will try to make it look nice and the defaults usually work well once you have enough text.)
-
-Talk way more about it. 
 
 ## Predictor variables
 
