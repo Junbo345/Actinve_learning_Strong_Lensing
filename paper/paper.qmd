@@ -19,7 +19,6 @@ bibliography: references.bib
 #| message: false
 
 library(tidyverse)
-library(palmerpenguins)
 
 ```
 
@@ -43,11 +42,9 @@ Telegraphing paragraph: The remainder of this paper is structured as follows. @s
 
 # Data {#sec-data}
 
-## Overview
+## Overview Check packages
 
-We use the statistical programming language R [@citeR].... Our data [@shelter].... Following @tellingstories, we consider...
-
-Overview text
+For this analysis, we combined four data sets all together into one. All these four data sets comes from **Worldbank** open data platform (@worldbank). We employed **R** (@citeR), a coding platform to download, clean and conduct statistical analysis. Besides, we also utilized R packages **tidyverse** (@tidy), **rstanarm** (@rstanarm), **ggplot2** (@gg), **knitr** (@knitr), **arrow** (@arrow), **here** (@here), and **dpylr** (@dplyr). The paper is outlined in github using starter folder provided in **Telling Stories With Data** (@tellingstories). 
 
 ## Measurement
 	
@@ -55,37 +52,58 @@ Some paragraphs about how we go from a phenomena in the world to an entry in the
 
 ## Outcome variables
 
-Add graphs, tables and text. Use sub-sub-headings for each outcome variable or update the subheading to be singular.
+The response variable in our analysis is the mortality rate below 5 year-old children for all countries. Here Mortality rate is calculated based on number of deaths of children under 5 years old per 1000 person. The histogram of this variable is shown in @fig-mor-1. We observe that the data ranges from 0 to 120, with a peak at 10-15. 
 
-
-
-Some of our data is of penguins (@fig-bills), from @palmerpenguins.
+However, this data is extremely right skewed and have several outlyers, thus we decided to perform log transformation to stabilize the variance and in-proving the normality of our dataset for a better regression model latter. The distribution after we perform log transformation is shown in @fig-mor-2, here the distribution is approximately normal ranging from 2 to 5 with a peak at 3. 
 
 ```{r}
-#| label: fig-bills
-#| fig-cap: Bills of penguins
+#| label: fig-mor
+#| fig-cap: Histogram for Mortality rate of different countries
+#| fig-subcap: ["Dsitribution before log tranformation", "Distribution after log transformation"]
 #| echo: false
+#| warning: false
+#| message: false
 
-ggplot(penguins, aes(x = island, fill = species)) +
-  geom_bar(alpha = 0.8) +
-  scale_fill_manual(values = c("darkorange","purple","cyan4"),
-                    guide = "none") +
+# Load necessary libraries
+library(ggplot2)
+library(arrow)
+
+# Read the data
+data <- read.csv(file = (here::here('data/01-raw_data/raw_data_Mortality.csv')))
+
+# Create the histogram
+ggplot(data, aes(x = SH.DYN.MORT)) +
+  geom_histogram(binwidth = 10, fill = "skyblue", color = "black", alpha = 0.7) +
+  labs(
+    x = "Under-Five Mortality Rate",
+    y = "Frequency"
+  ) +
   theme_minimal() +
-  facet_wrap(~species, ncol = 1) +
-  coord_flip()
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
+    axis.title = element_text(size = 10)
+  )
+
+analysis_data <- read_parquet(file = (here::here('data/02-analysis_data/analysis_data.parquet')))
+
+# Create the histogram
+ggplot(analysis_data, aes(x = Mortality)) +
+  geom_histogram(binwidth = 0.5, fill = "skyblue", color = "black", alpha = 0.7) +
+  labs(
+    x = "Under-Five Mortality Rate",
+    y = "Frequency"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
+    axis.title = element_text(size = 10)
+  )
+
 ```
 
 Talk more about it.
 
 And also planes (@fig-planes). (You can change the height and width, but don't worry about doing that until you have finished every other aspect of the paper - Quarto will try to make it look nice and the defaults usually work well once you have enough text.)
-
-```{r}
-#| label: fig-planes
-#| fig-cap: Relationship between wing length and width
-#| echo: false
-#| warning: false
-#| message: false
-```
 
 Talk way more about it. 
 
