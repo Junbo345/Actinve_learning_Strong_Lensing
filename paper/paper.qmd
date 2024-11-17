@@ -2,15 +2,15 @@
 title: "My title"
 subtitle: "My subtitle if needed"
 author: 
-  - First author
-  - Another author
-thanks: "Code and data are available at: [https://github.com/RohanAlexander/starter_folder](https://github.com/RohanAlexander/starter_folder)."
+  - Junbo Li
+thanks: "Code and data are available at: [https://github.com/Junbo345/Mortality_analysis]."
 date: today
 date-format: long
 abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
 format: pdf
 number-sections: true
 bibliography: references.bib
+toc: true
 ---
 
 ```{r}
@@ -25,20 +25,18 @@ library(tidyverse)
 
 # Introduction
 
-Overview paragraph
+Over the past 30 years, advancements in society and technology have significantly reduced global mortality rates, particularly for children under the age of five. The under-five mortality rate declined from 93 deaths per 1,000 live births in 1990 to 37 deaths per 1,000 live births in 2022 (@worldbank). This progress represents millions of children who now have better chances of survival, marking a substantial achievement in global health.
 
-Estimand paragraph
+In this study, we examined the under-five mortality rate for each country in 2022, focusing on three key factors: food production index, DPT vaccine coverage, and per-capita health expenditure. These factors were chosen because they reflect critical components influencing child mortality. Infectious diseases, such as pneumonia, diarrhea, and malaria, remain leading causes of under-five deaths, and these are directly linked to vaccination coverage and healthcare spending. Similarly, maternal health during childbirth is influenced by healthcare accessibility and quality, which is often tied to national health expenditures (@who2024childmortality). While food production does not directly address infectious disease or maternal health, it reflects a nation’s ability to meet nutritional needs, which is critical for preventing malnutrition—a major underlying cause of child deaths (add supporting explanation and citation).
 
-Results paragraph
+Our findings reveal that increasing vaccine coverage and per-capita health expenditures significantly reduces under-five mortality rates. However, food production index does not exhibit a direct impact, suggesting that its role is mediated by other factors such as distribution systems and food quality. Despite progress in reducing global mortality, the pace of reduction has slowed considerably since 2015, decreasing from an annual rate of 3.8% during the Millennium Development Goal (MDG) era (2000–2015) to 2.1% during the Sustainable Development Goal (SDG) era (2015–2022) (@unicef2022underfive). In 2022 alone, 4.9 million children under the age of five died, equating to approximately 13,400 deaths per day (@unicef2022underfive).
 
-Why it matters paragraph
+Furthermore, the distribution of under-five mortality rates remains highly uneven. Developed countries such as Canada and the United States report mortality rates as low as 10 per 1,000 live births, while developing nations—particularly in sub-Saharan Africa—experience rates exceeding 100 per 1,000 live births (@worldbank). This disparity highlights the urgent need for targeted interventions in high-mortality regions. The factors studied in this paper, such as vaccination and healthcare spending, are actionable and can be effectively improved in these regions through foreign aid and international collaboration.
 
-Telegraphing paragraph: The remainder of this paper is structured as follows. @sec-data....
+The remainder of this paper is organized as follows. @sec-data describes the data sources, key variables, and preprocessing steps, including transformations applied to address skewness and improve model validity. @sec-model outlines the modeling approach, including the choice of predictors, justification of the model structure, and Bayesian implementation. @sec-results presents the results of the analysis, highlighting the effects of each predictor on under-five mortality. Finally, @sec-diss discusses the implications of the findings, the limitations of the study, and recommendations for future research and policy interventions aimed at reducing child mortality globally.
 
-
-
-
-
+## Estimand
+The primary estimand of this study is the effect of three predictors—food production index, vaccination coverage (DPT vaccine percentage), and per-capita health expenditure (log-transformed)—on the logarithm of the under-five mortality rate for each country in 2022. This analysis seeks to quantify the extent to which these factors contribute to variations in mortality rates across nations. By addressing these relationships, the study aims to identify potential intervention points for reducing preventable child deaths and achieving progress toward the Sustainable Development Goals for child survival.
 
 # Data {#sec-data}
 
@@ -344,7 +342,7 @@ kable(model_summary, digits = 3)
 
 
 
-# Discussion
+# Discussion {#sec-diss}
 
 ## First discussion point {#sec-first-point}
 
