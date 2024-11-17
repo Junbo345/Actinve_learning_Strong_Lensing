@@ -58,11 +58,12 @@ However, this data is extremely right skewed and have several outlyers, thus we 
 
 ```{r}
 #| label: fig-mor
-#| fig-cap: Histogram for Mortality rate of different countries
+#| fig-cap: Data Analysis for Mortality Rate of Different Countries
 #| fig-subcap: ["Dsitribution before log tranformation", "Distribution after log transformation"]
 #| echo: false
 #| warning: false
 #| message: false
+#| layout-ncol: 2
 
 # Load necessary libraries
 library(ggplot2)
@@ -73,7 +74,7 @@ data <- read.csv(file = (here::here('data/01-raw_data/raw_data_Mortality.csv')))
 
 # Create the histogram
 ggplot(data, aes(x = SH.DYN.MORT)) +
-  geom_histogram(binwidth = 10, fill = "skyblue", color = "black", alpha = 0.7) +
+  geom_histogram(binwidth = 7, fill = "skyblue", color = "black", alpha = 0.7) +
   labs(
     x = "Under-Five Mortality Rate",
     y = "Frequency"
@@ -81,14 +82,14 @@ ggplot(data, aes(x = SH.DYN.MORT)) +
   theme_minimal() +
   theme(
     plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
-    axis.title = element_text(size = 10)
+    axis.title = element_text(size = 12)
   )
 
 analysis_data <- read_parquet(file = (here::here('data/02-analysis_data/analysis_data.parquet')))
 
 # Create the histogram
 ggplot(analysis_data, aes(x = Mortality)) +
-  geom_histogram(binwidth = 0.5, fill = "skyblue", color = "black", alpha = 0.7) +
+  geom_histogram(binwidth = 0.3, fill = "skyblue", color = "black", alpha = 0.7) +
   labs(
     x = "Under-Five Mortality Rate",
     y = "Frequency"
@@ -96,7 +97,7 @@ ggplot(analysis_data, aes(x = Mortality)) +
   theme_minimal() +
   theme(
     plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
-    axis.title = element_text(size = 10)
+    axis.title = element_text(size = 12)
   )
 
 ```
@@ -104,18 +105,154 @@ ggplot(analysis_data, aes(x = Mortality)) +
 
 ## Predictor variables
 
-Add graphs, tables and text.
+In our mdoel, we have three Preditor variables, namely, Food production index, which is the relative level of agricultural production for each nation compared with the base period 2014-2016 (@worldbank); Current health expenditure per capita (current US$); and DPT vaccine percentage. 
 
-Use sub-sub-headings for each outcome variable and feel free to combine a few into one if they go together naturally.
+We will first look at the food production index. From @fig-food-1, we see that it ranges from 60 to 180, with a center at 110, and the shape is approximated normal distributed. @fig-food-2 is the scatter plot between Food production index and log of Mortality rate, with a best line of fit and standard error. We obsereve a slightly positive linear relationship between these two variables. Detailed relationship will be studied in @sec-model. 
+```{r}
+#| label: fig-food
+#| fig-cap: Data Analysis of Predictor Food Production Index
+#| fig-subcap: ["Histogram of each countries' food production index", "Scatter plot of each countries' Food production index VS. Log of Mortality"]
+#| echo: false
+#| warning: false
+#| message: false
+#| layout-ncol: 2
+
+# Load necessary libraries
+library(ggplot2)
+library(arrow)
+
+analysis_data <- read_parquet(file = (here::here('data/02-analysis_data/analysis_data.parquet')))
+
+# Create the histogram
+ggplot(analysis_data, aes(x = Food)) +
+  geom_histogram(binwidth = 5, fill = "skyblue", color = "black", alpha = 0.7) +
+  labs(
+    x = "Food Production Index",
+    y = "Frequency"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
+    axis.title = element_text(size = 12)
+  )
+
+ggplot(analysis_data, aes(x = Food, y = Mortality)) +
+  geom_point(color = "steelblue", alpha = 0.6) +
+  geom_smooth(method = "lm", color = "darkred", fill = "pink", se = TRUE, alpha = 0.3) +
+  labs(
+    x = "Food Production Index",
+    y = "Mortality Rate",
+  ) +
+  theme_minimal() +
+  theme(
+    axis.title = element_text(size = 12)
+  )
+```
+Next is the Current health expenditure. From @fig-health-1, we see that it ranges from 0 to 12000, but the shape of the distribution is extremely skewed to the right. Thus we decided to perform a log transformation to stabilize the normal shape. @fig-health-2 is the histogram after the log transformation, we see that it now ranges from 0 to 10 with a center at 6 and the shape a approximately normal now. @fig-health-3 is a scatter plot between Log of Mortality rate and Log of Current health Expenditure, with a best line of fit and standard error. We observe a significant negative linear relationship between these two variables. Detailed relationshape will be studied in @sec-model. 
+```{r}
+#| label: fig-health
+#| fig-cap: Data Analysis of Predictor Current Health Expenditure
+#| fig-subcap: ["Histogram of each countries' Health Expenditure Per Capita, Measured in US$. Before log transformation", "Histogram of each countries' Health Expenditure Per Capita, Measured in US$. After log transformation", "Scatter plot of each countries' Health Expenditure Per Capita, Measured in US$ VS. Log of Mortality"]
+#| echo: false
+#| warning: false
+#| message: false
+#| layout-ncol: 2
+
+# Load necessary libraries
+library(ggplot2)
+library(arrow)
+library(knitr)
+
+raw_data <- read.csv(file = (here::here('data/01-raw_data/raw_data_Healthexpense.csv')))
+
+analysis_data <- read_parquet(file = (here::here('data/02-analysis_data/analysis_data.parquet')))
+
+ggplot(raw_data, aes(x = SH.XPD.CHEX.PC.CD)) +
+  geom_histogram(binwidth = 500, fill = "skyblue", color = "black", alpha = 0.7) +
+  labs(
+    x = "Health Expense per capita",
+    y = "Frequency"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
+    axis.title = element_text(size = 12)
+  )
+
+# Create the histogram
+ggplot(analysis_data, aes(x = Health_expense)) +
+  geom_histogram(binwidth = 0.5, fill = "skyblue", color = "black", alpha = 0.7) +
+  labs(
+    x = "Log of Health Expense per capita",
+    y = "Frequency"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
+    axis.title = element_text(size = 12)
+  )
+
+ggplot(analysis_data, aes(x = Health_expense, y = Mortality)) +
+  geom_point(color = "steelblue", alpha = 0.6) +
+  geom_smooth(method = "lm", color = "darkred", fill = "pink", se = TRUE, alpha = 0.3) +
+  labs(
+    x = "Log of Health Expense per capita",
+    y = "Mortality Rate",
+  ) +
+  theme_minimal() +
+  theme(
+    axis.title = element_text(size = 12)
+  )
+```
+Finally is the DPT vaccine percentage. From @fig-DPT-1, we see that it ranges from 30 to 100, but the shape of the distribution is skewed to the left, we will discuss this in @sec-results. Here we do not have efficient tecnics to stablize the distribution. @fig-DPT-2 is a scatter plot between DPT vaccine percentage and Log of Mortality rate, with a best line of fit and standard error. We observe a significant negative linear relationship between these two variables. Detailed relationship will be studied in @sec-model. 
+```{r}
+#| label: fig-DPT
+#| fig-cap: Data Analysis of Predictor DPT Vaccine Percentage
+#| fig-subcap: ["Histogram of each countries' DPT vaccine percentage", "Scatter plot of each countries' DPT Vaccine Percentage VS. Log of Mortality"]
+#| echo: false
+#| warning: false
+#| message: false
+#| layout-ncol: 2
+
+# Load necessary libraries
+library(ggplot2)
+library(arrow)
+library(knitr)
+library(dplyr)
+
+analysis_data <- read_parquet(file = (here::here('data/02-analysis_data/analysis_data.parquet')))
+
+# Create the histogram
+ggplot(analysis_data, aes(x = Vacinne)) +
+  geom_histogram(binwidth = 5, fill = "skyblue", color = "black", alpha = 0.7) +
+  labs(
+    x = "DPT vaccine percentage",
+    y = "Frequency"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
+    axis.title = element_text(size = 12)
+  )
+
+ggplot(analysis_data, aes(x = Vacinne, y = Mortality)) +
+  geom_point(color = "steelblue", alpha = 0.6) +
+  geom_smooth(method = "lm", color = "darkred", fill = "pink", se = TRUE, alpha = 0.3) +
+  labs(
+    x = "DPT vaccine percentage",
+    y = "Mortality Rate",
+  ) +
+  theme_minimal() +
+  theme(
+    axis.title = element_text(size = 12)
+  )
+```
+## Missing Data and Time Inconsistancy
+In our file, the varible Health Expendure is collect for year 2021 while the others is collected in year 2022. We done this is because there is n data avliable for year 2022 of this data. We believe that these data are recent and so the data collected in year 2021 could still do a good job associating data in 2022. 
+Also there are a few data missing for some minor countries. We made the decision to drop them and continue our modeling. We will discuss further implications of these two in @sec-results
 
 
-
-
-
-
-
-
-# Model
+# Model {#sec-model}
 
 The goal of our modeling strategy is to investigate how the DDT vaccine coverage, food production index, and current health expenditure per capita (current US$) relate to the under-five mortality rate for each nation.
 
@@ -149,7 +286,7 @@ We use a multivariate linear model to capture the relationship between the predi
 
 The Bayesian framework is employed due to its ability to incorporate prior knowledge, improve uncertainty quantification, and handle small sample sizes effectively.
 
-# Results
+# Results {#sec-results}
 
 Our results are summarized in @tbl-modelresults.
 
