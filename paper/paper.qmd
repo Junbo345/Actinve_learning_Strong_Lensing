@@ -288,22 +288,22 @@ The Bayesian framework is employed due to its ability to incorporate prior knowl
 
 Our results are summarized in @tbl-modelresults.
 
-###Intercept:
+##Intercept:
 The intercept estimate of 6.643 represents the expected logarithm of the under-five mortality rate when all predictors are held constant at their reference or baseline values (e.g., average food production, average vaccine coverage, and average health expenditure). This serves as a baseline for interpreting the effects of the predictors.
 
-###Food:
+##Food:
 Food Production Index:
 The coefficient for the food production index is 0.003, indicating a very slight positive relationship between food production and the under-five mortality rate. This naïvely suggests that reducing food production could also reduce mortality, which is counter-intuitive.
 
 However, a closer examination of the confidence interval for this predictor shows that it includes 0. This implies that the relationship is not statistically significant, and food production is not strongly related to overall under-five mortality rates.
 This finding suggests that while food production is essential for societal well-being, its immediate impact on reducing child mortality might depend on other factors such as food access, distribution systems, and nutritional quality.
 
-###Vaccine Coverage:
+##Vaccine Coverage:
 The coefficient for vaccine coverage is -0.013, meaning that for every 1 percentage point increase in vaccine coverage, the logarithm of the under-five mortality rate decreases by 1.3%, holding other variables constant.
 
 This highlights the critical role of vaccination programs in reducing child mortality. For example, increasing vaccine coverage by 10 percentage points could reduce the mortality rate by approximately 13%, emphasizing the importance of robust immunization initiatives.
 
-###Health Expenditure (Log-Transformed):
+##Health Expenditure (Log-Transformed):
 The coefficient for the log-transformed health expenditure is -0.529, indicating that a 1% increase in health expenditure per capita is associated with a 0.529 unit decrease in the log of the under-five mortality rate, holding all other predictors constant.
 
 ```{r}
