@@ -337,26 +337,27 @@ model_summary <- broom.mixed::tidy(model1, effects = "fixed", conf.int = TRUE) %
 kable(model_summary, digits = 3)
 
 ```
-```
+
 
 
 
 
 # Discussion {#sec-diss}
 
-## First discussion point {#sec-first-point}
+## implications
+The UN's Sustainable Development Goal 3.2 aims to reduce the mortality rate of children under five to fewer than 25 per 1,000 live births by 2030 (@who2024). While substantial progress has been made, achieving this target within the next six years presents significant challenges. This study confirms that while the global trend shows a decrease, the pace of this reduction has slowed since 2015. Furthermore, in @sec-data we found significant disparities between countries. Some nations already meet the SDG target, but others exhibit mortality rates four times higher than the threshold, predominantly in low-income regions such as sub-Saharan Africa.
 
-If my paper were 10 pages, then should be be at least 2.5 pages. The discussion is a chance to show off what you know and what you learnt from all this. 
+To meet the SDG targets, urgent and focused international collaboration is required. Our findings emphasize two critical areas for intervention: vaccine coverage and healthcare spending. Vaccination programs have a clear and significant impact on reducing child mortality. Therefore, international aid should prioritize making newborn vaccines affordable, ensuring their availability, and facilitating universal access in high-mortality regions.
 
-## Second discussion point
+Healthcare spending presents a more complex challenge. It encompasses multiple factors, including a country's economic status, infrastructure development, and access to hospital services. Addressing these requires a sustained, long-term commitment. Developed countries can play a pivotal role by providing financial support, sharing technological advancements, and fostering knowledge transfer to enhance healthcare systems in developing nations. Without addressing these systemic issues, achieving equitable child survival rates will remain elusive.
 
-Please don't use these as sub-heading labels - change them to be what your point actually is.
+## limitation and next steps
+This study has several limitations that should be addressed in future research. First, as discussed in Section 2, we lack data from several smaller countries. While their populations are minimal, excluding these nations raises potential biases and ethical concerns by not representing their unique challenges. Second, the most recent data available is from 2022. More current datasets would enable a more accurate analysis, reflecting recent developments in healthcare and child mortality trends.
 
-## Third discussion point
+Additionally, while this study focused on three predictors, the dataset contains other indicators that could potentially enrich the analysis. However, many of these indicators suffer from missing or outdated data, limiting their utility. Future research should prioritize ensuring data completeness and timeliness to enhance model robustness.
 
-## Weaknesses and next steps
+Lastly, advanced modeling techniques and the incorporation of additional predictors could yield deeper insights. Future studies should explore innovative models to capture complex relationships and interactions, thereby providing more nuanced recommendations for policy interventions.
 
-Weaknesses and next steps should also be included.
 
 \newpage
 
