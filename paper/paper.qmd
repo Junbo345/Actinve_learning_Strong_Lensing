@@ -46,7 +46,15 @@ For this analysis, we combined four data sets all together into one. All these f
 
 ## Measurement
 	
-Some paragraphs about how we go from a phenomena in the world to an entry in the dataset.
+The data used in this study were collected from established international organizations and reflect key metrics in health and socioeconomic development. The under-five mortality rate, the primary response variable, is measured as the probability per 1,000 live births that a child will not survive to their fifth birthday, given age-specific mortality rates of the specified year. This indicator is developed by the UN Inter-agency Group for Child Mortality Estimation and leverages statistical models to reconcile differences among multiple data sources.
+
+Predictors include:
+
+**Food Production Index**: This metric, provided by the Food and Agriculture Organization, captures the aggregate volume of food production normalized to the 2014-2016 base period. It excludes non-nutritive edible items such as coffee and tea and accounts for deductions of intermediate agricultural inputs like seed and feed.
+
+**Health Expenditure per Capita**: Sourced from the World Health Organization’s Global Health Expenditure database, this indicator measures current health spending per capita in current US dollars, including goods and services consumed annually.
+
+**DPT Vaccine Coverage**: This is the percentage of children aged 12-23 months who received three doses of the diphtheria, pertussis, and tetanus vaccine, based on estimates derived from national administrative data and household surveys.
 
 ## Outcome variables
 
@@ -367,6 +375,27 @@ Lastly, advanced modeling techniques and the incorporation of additional predict
 
 
 # Additional data details
+
+## Challenges in Observational Data and Sampling
+The data used in this study, particularly under-five mortality rates, are largely derived from surveys, censuses, and observational data rather than complete vital registration systems. Observational data present unique challenges, such as recall bias in surveys, underreporting in regions with weak administrative systems, and inconsistencies in data collection methodologies across countries. These issues are particularly acute in low- and middle-income countries (LMICs), where infrastructure limitations impede accurate data capture.
+
+Sampling Strategies
+To mitigate these challenges, the UN Inter-agency Group for Child Mortality Estimation employs a combination of direct and indirect estimation techniques. Direct methods rely on household surveys, such as Demographic and Health Surveys (DHS) and Multiple Indicator Cluster Surveys (MICS), which use stratified random sampling to ensure representativeness. These surveys ask respondents to recall birth and death histories, which introduces recall bias, particularly for events occurring further in the past.
+
+Indirect methods use model life tables and historical data to extrapolate mortality estimates in the absence of recent or reliable survey data. These methods rely on assumptions about fertility, mortality trends, and the demographic structure of the population, which may not hold true in all contexts, particularly in regions experiencing rapid epidemiological transitions or conflict.
+
+## Linkages to Literature
+The challenges and methodologies described align with findings in the literature. Alkema and New (2014) emphasized the importance of integrating multiple data sources to improve the reliability of child mortality estimates. They highlighted the use of Bayesian hierarchical models to synthesize survey and vital registration data, which is a key component of the UN Inter-agency Group’s methodology.
+
+Moultrie et al. (2013) detailed the limitations of indirect estimation methods, particularly their reliance on model assumptions that may not hold in regions undergoing rapid social or economic change. Their findings support the use of simulation studies, such as ours, to assess the robustness of mortality estimates under varying data quality scenarios.
+
+## Implications for Policy and Future Research
+The limitations of survey-based and observational data highlight the need for:
+
+Investment in Vital Registration Systems: Increasing the coverage and quality of birth and death registrations in LMICs would reduce reliance on indirect methods and improve the accuracy of mortality estimates.
+Improved Survey Methodologies: Incorporating digital data collection tools and cross-validation with other data sources can reduce recall bias and enhance data reliability.
+Advanced Statistical Techniques: Bayesian hierarchical models and machine learning approaches can integrate diverse data sources and account for biases more effectively than traditional methods.
+Future research should focus on combining survey data with novel data sources, such as satellite imagery and mobile health records, to address data gaps and improve mortality estimation in real time. These approaches could revolutionize the monitoring of global health indicators, enabling more targeted and timely interventions. (Add refer)
 
 # Model details {#sec-model-details}
 
