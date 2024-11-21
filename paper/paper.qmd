@@ -1,12 +1,12 @@
 ---
-title: "My title"
-subtitle: "My subtitle if needed"
+title: "Exploring Determinants of Child Mortality: The Role of Vaccination, Healthcare Spending, and Nutrition"
+subtitle: "Findings Reveal Vaccination and Healthcare Spending as Key Drivers of Mortality Reduction"
 author: 
   - Junbo Li
 thanks: "Code and data are available at: [https://github.com/Junbo345/Mortality_analysis]."
 date: today
 date-format: long
-abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
+abstract: "Child mortality has significantly decreased over the past three decades, but progress remains uneven across regions. This study examines the under-five mortality rates of 2022, focusing on the effects of vaccination coverage, health expenditure per capita, and food production indices. Using a Bayesian modeling approach, we found that increased vaccination coverage and healthcare spending significantly reduce child mortality, while food production had no direct impact. These findings underscore the critical need for targeted interventions in high-mortality regions, emphasizing the importance of vaccination programs and healthcare funding in achieving global child survival goals."
 format: pdf
 number-sections: true
 bibliography: references.bib
@@ -401,9 +401,9 @@ Future research should focus on combining survey data with novel data sources, s
 
 ## Posterior predictive check
 
-In @fig-ppcheckandposteriorvsprior-1 we implement a posterior predictive check. This shows...
+We conducted a posterior predictive check to evaluate how well the model predicts under-five mortality rates. @fig-ppcheckandposteriorvsprior-1 illustrates the predictive distribution compared to the observed data. The close alignment between observed and predicted values indicates that the model captures the main trends in the data effectively.
 
-In @fig-ppcheckandposteriorvsprior-2 we compare the posterior with the prior. This shows... 
+In @fig-ppcheckandposteriorvsprior-2 we compare the posterior with the prior. This shows that the data significantly updates the prior beliefs for all key parameters. The posterior distributions of predictors—vaccine coverage, health expenditure, and food production index—highlight the robustness of their effects in the model.
 
 ```{r}
 #| eval: true
@@ -411,7 +411,7 @@ In @fig-ppcheckandposteriorvsprior-2 we compare the posterior with the prior. Th
 #| message: false
 #| warning: false
 #| label: fig-ppcheckandposteriorvsprior
-#| layout-ncol: 2
+#| layout-ncol: 1
 #| fig-cap: "Examining how the model fits, and is affected by, the data"
 #| fig-subcap: ["Posterior prediction check", "Comparing the posterior with the prior"]
 
@@ -430,9 +430,9 @@ posterior_vs_prior(model1) +
 
 ## Diagnostics
 
-@fig-stanareyouokay-1 is a trace plot. It shows... This suggests...
+@fig-stanareyouokay-1 is a trace plot. It shows adequate mixing of the Markov Chain Monte Carlo (MCMC) chains, indicating proper convergence. Additionally, the Rhat values for all parameters (Figure 6b) are below 1.05, further confirming convergence and the reliability of the parameter estimates.
 
-@fig-stanareyouokay-2 is a Rhat plot. It shows... This suggests...
+@fig-stanareyouokay-2 is a Rhat plot. It shows no significant patterns, indicating that the model assumptions hold. Additionally, the Bayesian framework effectively quantifies uncertainty, with credible intervals for the predictors providing insight into their respective influences on mortality.
 
 ```{r}
 #| echo: false
@@ -442,7 +442,8 @@ posterior_vs_prior(model1) +
 #| label: fig-stanareyouokay
 #| fig-cap: "Checking the convergence of the MCMC algorithm"
 #| fig-subcap: ["Trace plot", "Rhat plot"]
-#| layout-ncol: 2
+#| layout-ncol: 1
+#| fig-width: 8
 
 plot(model1, "trace")
 
