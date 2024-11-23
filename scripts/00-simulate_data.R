@@ -1,52 +1,39 @@
 #### Preamble ####
-# Purpose: Simulates a dataset of Australian electoral divisions, including the 
-  #state and party that won each division.
-# Author: Rohan Alexander
-# Date: 26 September 2024
-# Contact: rohan.alexander@utoronto.ca
+# Purpose: Simulates the data that used to predict the mortality rate in 2022,
+# the predictor variables are food production index, health expenses, and DPT vaccine rate
+# Author: Junbo Li
+# Date: 12 NOV 2024
+# Contact: junb.li@mail.utoronto.ca
 # License: MIT
-# Pre-requisites: The `tidyverse` package must be installed
-# Any other information needed? Make sure you are in the `starter_folder` rproj
+# Pre-requisites: None
+# Any other information needed? None
 
 
 #### Workspace setup ####
 library(tidyverse)
-set.seed(853)
+library(arrow)
 
+# Set seed for reproducibility
+set.seed(123)
 
-#### Simulate data ####
-# State names
-states <- c(
-  "New South Wales",
-  "Victoria",
-  "Queensland",
-  "South Australia",
-  "Western Australia",
-  "Tasmania",
-  "Northern Territory",
-  "Australian Capital Territory"
+# Generate data
+n <- 100  # Number of observations
+
+# Generate predictors
+HealthExpenses <- runif(n, 0, 4000)  # Health expenses
+DPTVaccineRate <- runif(n, 0, 100)  # DPT vaccine rate
+FoodProductionIndex <- runif(n, 10, 100)  # Food production index
+
+# Create MortalityRate negatively related to the other variables
+MortalityRate <- 100 - 0.01 * HealthExpenses - 0.3 * DPTVaccineRate - 0.2 * FoodProductionIndex + rnorm(n, mean = 0, sd = 5)
+
+# Combine into a data frame
+dataset <- data.frame(
+  MortalityRate = MortalityRate,
+  HealthExpenses = HealthExpenses,
+  DPTVaccineRate = DPTVaccineRate,
+  FoodProductionIndex = FoodProductionIndex
 )
 
-# Political parties
-parties <- c("Labor", "Liberal", "Greens", "National", "Other")
-
-# Create a dataset by randomly assigning states and parties to divisions
-analysis_data <- tibble(
-  division = paste("Division", 1:151),  # Add "Division" to make it a character
-  state = sample(
-    states,
-    size = 151,
-    replace = TRUE,
-    prob = c(0.25, 0.25, 0.15, 0.1, 0.1, 0.1, 0.025, 0.025) # Rough state population distribution
-  ),
-  party = sample(
-    parties,
-    size = 151,
-    replace = TRUE,
-    prob = c(0.40, 0.40, 0.05, 0.1, 0.05) # Rough party distribution
-  )
-)
-
-
-#### Save data ####
-write_csv(analysis_data, "data/00-simulated_data/simulated_data.csv")
+# Save the dataset as a Parquet file
+write_parquet(dataset, "data/00-simulated_data/simulated_dataset.parquet")

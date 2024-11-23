@@ -1,89 +1,54 @@
 #### Preamble ####
-# Purpose: Tests the structure and validity of the simulated Australian 
-  #electoral divisions dataset.
-# Author: Rohan Alexander
-# Date: 26 September 2024
-# Contact: rohan.alexander@utoronto.ca
+# Purpose: Tests Structure and validity of simulated data to predicted mortality rate
+# Author: Junbo Li
+# Date: 12 NOV 2024
+# Contact: junb.li@mail.utoronto.ca
 # License: MIT
-# Pre-requisites: 
-  # - The `tidyverse` package must be installed and loaded
-  # - 00-simulate_data.R must have been run
-# Any other information needed? Make sure you are in the `starter_folder` rproj
+# Pre-requisites: None
+# Any other information needed? None
 
 
 #### Workspace setup ####
 library(tidyverse)
+library(arrow)
+library(testthat)
 
-analysis_data <- read_csv("data/00-simulated_data/simulated_data.csv")
+analysis_data <- read_parquet("data/00-simulated_data/simulated_dataset.parquet")
 
-# Test if the data was successfully loaded
-if (exists("analysis_data")) {
-  message("Test Passed: The dataset was successfully loaded.")
-} else {
-  stop("Test Failed: The dataset could not be loaded.")
-}
-
-
-#### Test data ####
-
-# Check if the dataset has 151 rows
-if (nrow(analysis_data) == 151) {
-  message("Test Passed: The dataset has 151 rows.")
-} else {
-  stop("Test Failed: The dataset does not have 151 rows.")
-}
-
-# Check if the dataset has 3 columns
-if (ncol(analysis_data) == 3) {
-  message("Test Passed: The dataset has 3 columns.")
-} else {
-  stop("Test Failed: The dataset does not have 3 columns.")
-}
-
-# Check if all values in the 'division' column are unique
-if (n_distinct(analysis_data$division) == nrow(analysis_data)) {
-  message("Test Passed: All values in 'division' are unique.")
-} else {
-  stop("Test Failed: The 'division' column contains duplicate values.")
-}
-
-# Check if the 'state' column contains only valid Australian state names
-valid_states <- c("New South Wales", "Victoria", "Queensland", "South Australia", 
-                  "Western Australia", "Tasmania", "Northern Territory", 
-                  "Australian Capital Territory")
-
-if (all(analysis_data$state %in% valid_states)) {
-  message("Test Passed: The 'state' column contains only valid Australian state names.")
-} else {
-  stop("Test Failed: The 'state' column contains invalid state names.")
-}
-
-# Check if the 'party' column contains only valid party names
-valid_parties <- c("Labor", "Liberal", "Greens", "National", "Other")
-
-if (all(analysis_data$party %in% valid_parties)) {
-  message("Test Passed: The 'party' column contains only valid party names.")
-} else {
-  stop("Test Failed: The 'party' column contains invalid party names.")
-}
-
-# Check if there are any missing values in the dataset
-if (all(!is.na(analysis_data))) {
-  message("Test Passed: The dataset contains no missing values.")
-} else {
-  stop("Test Failed: The dataset contains missing values.")
-}
-
-# Check if there are no empty strings in 'division', 'state', and 'party' columns
-if (all(analysis_data$division != "" & analysis_data$state != "" & analysis_data$party != "")) {
-  message("Test Passed: There are no empty strings in 'division', 'state', or 'party'.")
-} else {
-  stop("Test Failed: There are empty strings in one or more columns.")
-}
-
-# Check if the 'party' column has at least two unique values
-if (n_distinct(analysis_data$party) >= 2) {
-  message("Test Passed: The 'party' column contains at least two unique values.")
-} else {
-  stop("Test Failed: The 'party' column contains less than two unique values.")
-}
+#### Test cases ####
+test_that("Dataset structure and value checks", {
+  
+  # Test if the dataset has 100 rows
+  expect_equal(nrow(dataset), 100, info = "The dataset should have 100 rows.")
+  
+  # Test if the dataset has 4 columns
+  expect_equal(ncol(dataset), 4, info = "The dataset should have 4 columns.")
+  
+  # Test if 'MortalityRate' values are within the expected range
+  expect_true(all(dataset$MortalityRate >= 5 & dataset$MortalityRate <= 100), 
+              info = "'MortalityRate' values should be within the range 5 to 100.")
+  
+  # Test if 'HealthExpenses' values are within the expected range
+  expect_true(all(dataset$HealthExpenses >= 0 & dataset$HealthExpenses <= 4000), 
+              info = "'HealthExpenses' values should be within the range 0 to 4000.")
+  
+  # Test if 'DPTVaccineRate' values are within the expected range
+  expect_true(all(dataset$DPTVaccineRate >= 0 & dataset$DPTVaccineRate <= 100), 
+              info = "'DPTVaccineRate' values should be within the range 0 to 100.")
+  
+  # Test if 'FoodProductionIndex' values are within the expected range
+  expect_true(all(dataset$FoodProductionIndex >= 10 & dataset$FoodProductionIndex <= 100), 
+              info = "'FoodProductionIndex' values should be within the range 10 to 100.")
+  
+  # Test if there are no missing values
+  expect_true(all(!is.na(dataset)), info = "The dataset should not contain any missing values.")
+  
+  # Test if 'MortalityRate' has at least two unique values
+  expect_true(length(unique(dataset$MortalityRate)) >= 2, 
+              info = "'MortalityRate' should have at least two unique values.")
+  
+  # Test if there are no negative values in any column
+  expect_true(all(dataset$HealthExpenses >= 0 & dataset$DPTVaccineRate >= 0 & 
+                    dataset$FoodProductionIndex >= 0 & dataset$MortalityRate >= 0), 
+              info = "There should be no negative values in the dataset.")
+})

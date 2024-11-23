@@ -1,69 +1,54 @@
 #### Preamble ####
-# Purpose: Tests... [...UPDATE THIS...]
-# Author: Rohan Alexander [...UPDATE THIS...]
-# Date: 26 September 2024 [...UPDATE THIS...]
-# Contact: rohan.alexander@utoronto.ca [...UPDATE THIS...]
+# Purpose: Tests Structure and validity of cleaned analysis data to predicted mortality rate
+# Author: Junbo Li
+# Date: 12 NOV 2024
+# Contact: junb.li@mail.utoronto.ca
 # License: MIT
-# Pre-requisites: [...UPDATE THIS...]
-# Any other information needed? [...UPDATE THIS...]
+# Pre-requisites: None
+# Any other information needed? None
 
 
 #### Workspace setup ####
 library(tidyverse)
+library(arrow)
 library(testthat)
 
-data <- read_csv("data/02-analysis_data/analysis_data.csv")
+dataset <- read_parquet(file = here::here("data/02-analysis_data/analysis_data.parquet"))
 
-
-#### Test data ####
-# Test that the dataset has 151 rows - there are 151 divisions in Australia
-test_that("dataset has 151 rows", {
-  expect_equal(nrow(analysis_data), 151)
-})
-
-# Test that the dataset has 3 columns
-test_that("dataset has 3 columns", {
-  expect_equal(ncol(analysis_data), 3)
-})
-
-# Test that the 'division' column is character type
-test_that("'division' is character", {
-  expect_type(analysis_data$division, "character")
-})
-
-# Test that the 'party' column is character type
-test_that("'party' is character", {
-  expect_type(analysis_data$party, "character")
-})
-
-# Test that the 'state' column is character type
-test_that("'state' is character", {
-  expect_type(analysis_data$state, "character")
-})
-
-# Test that there are no missing values in the dataset
-test_that("no missing values in dataset", {
-  expect_true(all(!is.na(analysis_data)))
-})
-
-# Test that 'division' contains unique values (no duplicates)
-test_that("'division' column contains unique values", {
-  expect_equal(length(unique(analysis_data$division)), 151)
-})
-
-# Test that 'state' contains only valid Australian state or territory names
-valid_states <- c("New South Wales", "Victoria", "Queensland", "South Australia", "Western Australia", 
-                  "Tasmania", "Northern Territory", "Australian Capital Territory")
-test_that("'state' contains valid Australian state names", {
-  expect_true(all(analysis_data$state %in% valid_states))
-})
-
-# Test that there are no empty strings in 'division', 'party', or 'state' columns
-test_that("no empty strings in 'division', 'party', or 'state' columns", {
-  expect_false(any(analysis_data$division == "" | analysis_data$party == "" | analysis_data$state == ""))
-})
-
-# Test that the 'party' column contains at least 2 unique values
-test_that("'party' column contains at least 2 unique values", {
-  expect_true(length(unique(analysis_data$party)) >= 2)
+#### Test cases ####
+test_that("Dataset structure and value checks", {
+  
+  # Test if the dataset has 100 rows
+  expect_equal(nrow(dataset), 182, info = "The dataset should have 100 rows.")
+  
+  # Test if the dataset has 4 columns
+  expect_equal(ncol(dataset), 5, info = "The dataset should have 4 columns.")
+  
+  # Test if 'MortalityRate' values are within the expected range
+  expect_true(all(dataset$Mortality >= 0 & dataset$Mortality <= 100), 
+              info = "'MortalityRate' values should be within the range 0 to 100.")
+  
+  # Test if 'HealthExpenses' values are within the expected range
+  expect_true(all(dataset$Health_expense >= 0), 
+              info = "'HealthExpenses' values should be larger than 0.")
+  
+  # Test if 'DPTVaccineRate' values are within the expected range
+  expect_true(all(dataset$Vacinne >= 0 & dataset$Vacinne <= 100), 
+              info = "'DPTVaccineRate' values should be within the range 0 to 100.")
+  
+  # Test if 'FoodProductionIndex' values are within the expected range
+  expect_true(all(dataset$Food >= 0 & dataset$Food <= 500), 
+              info = "'FoodProductionIndex' values should be within the range 0 to 500.")
+  
+  # Test if there are no missing values
+  expect_true(all(!is.na(dataset)), info = "The dataset should not contain any missing values.")
+  
+  # Test if 'MortalityRate' has at least two unique values
+  expect_true(length(unique(dataset$Mortality)) >= 2, 
+              info = "'MortalityRate' should have at least two unique values.")
+  
+  # Test if there are no negative values in any column
+  expect_true(all(dataset$Health_expense >= 0 & dataset$Vacinne >= 0 & 
+                    dataset$Food >= 0 & dataset$Mortality >= 0), 
+              info = "There should be no negative values in the dataset.")
 })
