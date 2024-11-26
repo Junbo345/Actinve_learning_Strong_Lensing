@@ -46,7 +46,7 @@ For this analysis, we combined four data sets all together into one. All these f
 
 ## Measurement
 	
-The analysis in this study relies on four datasets, each collected and prepared by various UN-affiliated organizations. Below, we provide a brief overview of the measurement and transformation processes for these datasets. Detailed descriptions and methodological specifics can be found in @sec-methods.
+The analysis in this study relies on four data sets, each collected and prepared by various UN-affiliated organizations. Below, we provide a brief overview of the measurement and transformation processes for these data sets. Detailed descriptions and methodological specifics can be found in @sec-methods.
 
 ### Response variable:
 
@@ -281,37 +281,45 @@ Additionally, some smaller countries lacked complete data and were excluded from
 
 # Model {#sec-model}
 
-The goal of our modeling strategy is to investigate how the DDT vaccine coverage, food production index, and current health expenditure per capita (current US$) relate to the under-five mortality rate for each nation.
-
-We aim to use this model to understand how the above mentioned three factors' impact on child mortality and identify opportunities for improving health outcomes, especially for high mortality rate nations. Background details and diagnostics are included in [Appendix -@sec-model-details].
+TOur modeling strategy aims to explore the relationships between DPT vaccine coverage, the food production index, and current health expenditure per capita (in current US$) with the under-five mortality rate across nations. By analyzing these factors, we seek to identify opportunities to improve child health outcomes, particularly in countries with high mortality rates. Supporting background information and diagnostics are provided in [Appendix -@sec-model-details].
 
 ## Model set-up
 
-Let $y_i$ be the logrithm of under-five mortality rate for nation $i$. We define the following predictors:
+Let $y_i$ be the logarithm of under-five mortality rate for nation $i$. We define the following predictors:
 
 $x_{1i}$: DDT vaccine coverage for nation $i$.
 $x_{2i}$: Food production index for nation $i$.
-$x_{3i}$: Logrithm of current health expenditure per capita (current US$) for nation $i$.
+$x_{3i}$: Logarithm of current health expenditure per capita (current US$) for nation $i$.
 The model is specified as:
 
 \begin{align} 
 y_i \mid \mu_i, \sigma &\sim \mbox{Normal}(\mu_i, \sigma) \\
 u_i &= \alpha + \beta_1 x_{1i} + \beta_2 x_{2i} + \beta_3 x_{3i} \\
-\alpha &\sim \mbox{Normal}(5, ) \\
+\alpha &\sim \mbox{Normal}(2.5, 1) \\
 \beta_1 &\sim \mbox{Normal}(0, 2.5)\\
 \beta_2 &\sim \mbox{Normal}(0, 2.5)\\
 \beta_3 &\sim \mbox{Normal}(0, 2.5)\\
 \sigma &\sim \mbox{Exponential}(1) 
 \end{align}
  
-We implement this model in R [@citeR] using the rstanarm package [@rstanarm], employing its default priors for predictors and a distribution of \mbox{Normal}(\mu_i, \sigma).
+We implement this model in R [@citeR] using the rstanarm package [@rstanarm].
 
 
 ### Model justification
 
-We use a multivariate linear model to capture the relationship between the predictors and the response variable. This choice is justified by the linear trends observed in the data (see @sec-data). The logarithmic transformation of the under-five mortality rate and current health expenditure per capita is applied to stabilize variance and linear relationships, ensuring model validity.
+A multivariate linear model was chosen to capture the relationships between the predictors (DPT vaccine coverage, food production index, and current health expenditure) and the response variable (under-five mortality rate). This choice is supported by observed linear trends in the data (see @sec-data). Logarithmic transformations were applied to both the under-five mortality rate and current health expenditure per capita to normalize the distributions and stabilize their linear relationships with the predictors.
 
-The Bayesian framework is employed due to its ability to incorporate prior knowledge, improve uncertainty quantification, and handle small sample sizes effectively.
+Default Bayesian priors were used for the predictors, as they provide a robust starting point. For the intercept term, a \mbox{Normal}(2.5, 1) prior was chosen, reflecting the observed distribution of the response variable (see @sec-data). 
+
+### Model weakness
+Several limitations are noted in this model:
+
+1. Skewed Predictor Distribution: The distribution of DPT vaccine coverage is skewed left, which may introduce bias. Despite attempts to address this, an ideal solution remains elusive.
+
+2. Potential Collinearity: While each predictor shows an individual linear relationship with the response variable, interdependencies between predictors may affect model accuracy.
+
+3. Simplified Assumptions: The model assumes linearity and does not capture potential non-linear interactions or regional variations that could influence under-five mortality rates.
+
 
 # Results {#sec-results}
 

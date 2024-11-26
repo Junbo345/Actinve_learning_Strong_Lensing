@@ -1,4 +1,4 @@
-# Starter folder
+# Mortality Analysis
 
 ## Overview
 
@@ -19,7 +19,7 @@ The repo is structured as:
 
 ## Statement on LLM usage
 
-Aspects of the code were written with the help of the auto-complete tool, Codriver. The abstract and introduction were written with the help of ChatHorse and the entire chat history is available in inputs/llms/usage.txt.
+The R code in scripts and on the paper were written with the help of Chat-GPT4. It is used to generate code and debugging. Also, the paper is written with the help of Chat-GPT4, it was used to generate idea, help conduct data analysis and fix grammar and logical error. The complete chat history is in other/llm_usage/usage.txt
 
 ## Some checks
 

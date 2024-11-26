@@ -22,7 +22,7 @@ first_model <- stan_glm(
   data = analysis_data,
   family = gaussian(),
   prior = normal(location = c(0, 0, 0), scale = c(2.5, 2.5, 2.5), autoscale = FALSE),
-  prior_intercept = normal(location = 5, scale = 2.5, autoscale = TRUE),
+  prior_intercept = normal(location = 2.5, scale = 1, autoscale = TRUE),
   prior_aux = exponential(rate = 1, autoscale = TRUE),
   seed = 853
 )
