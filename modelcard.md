@@ -16,7 +16,7 @@
 
 <!-- Provide a longer summary of what this model is. -->
 
-{{ model_description | default("", true) }}
+{{ model_description | default("12345", true) }}
 
 - **Developed by:** {{ developers | default("[More Information Needed]", true)}}
 - **Funded by [optional]:** {{ funded_by | default("[More Information Needed]", true)}}
