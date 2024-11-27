@@ -1,21 +1,14 @@
 # Model Card for Bayesian Multi-linear Model of Under Five Mortality Rate
 
-<!-- Provide a quick summary of what the model is/does. -->
-
-{{ model_summary | default("", true) }}
-
 ## Model Details
 
 ### Model Description
 
-<!-- Provide a longer summary of what this model is. -->
-
-{{ model_description | default("12345", true) }}
+This Model uses the Food production index based on 2014-1016, the DPT vaccine coverage rate, and average health spending (in USD) to predict the Mortality rate under five in each nation. All data are available on the World Bank Open-data platform. 
 
 - **Developed by:** Junbo Li
 - **Model type:** Bayesian Multi-linear
-- **Language(s) (NLP):** {{ language | default("[More Information Needed]", true)}}
-- **License:** {{ license | default("[More Information Needed]", true)}}
+- **License:** 
 
 ## Uses
 
