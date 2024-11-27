@@ -37,7 +37,7 @@ Make sure your prior belief of the relationship is a linear relationship and the
 
 ### Training Data
 
-The training data is downloaded directly from the World Bank API, code available in [View the code](scripts/02-download_data.R). We cleaned them can saved them into a single parquet file availiable in [View the parquet](data/02-analysis_data)
+The training data is downloaded directly from the World Bank API, code available in [View the code](scripts/02-download_data.R). We cleaned them can saved them into a single parquet file available in [View the parquet](data/02-analysis_data)
 
 
 ### Training Procedure
@@ -47,7 +47,7 @@ Here we used the stan_glm function in package rstanarm to train our model detail
 
 #### Training Hyperparameters
 
-- **Training regime:** The stan_glm funtion needs to specify priors of bayesian model. The predictors used default priors (N(0,2.5)) and the intercept used N(2.5,1). 
+- **Training regime:** The stan_glm function needs to specify the  priors of the Bayesian model. The predictors used default priors (N(0,2.5)) and the intercept used N(2.5,1). 
 
 
 ## Evaluation
@@ -57,7 +57,7 @@ Here we used the stan_glm function in package rstanarm to train our model detail
 
 #### Testing Data
 
-Since we do not have availiable testing data, we will use Leace One Out Corss Validation (LOOCV) to obtain an estimte of the testing data. 
+Since we do not have available testing data, we will use Leace One Out Cross Validation (LOOCV) to obtain an estimate of the testing data. 
 
 
 #### Metrics
