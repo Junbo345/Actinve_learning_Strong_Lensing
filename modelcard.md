@@ -4,7 +4,7 @@
 
 ### Model Description
 
-This Model uses the Food production index based on 2014-1016, the DPT vaccine coverage rate, and average health spending (in USD) to predict the Mortality rate under five in each nation. All data are available on the World Bank Open-data platform. 
+This Model uses the Food production index based on 2014-1016, the DPT vaccine coverage rate, and log of average health spending (in USD) to predict the log of Mortality rate under five in each nation. All data are available on the World Bank Open-data platform. 
 
 - **Developed by:** Junbo Li
 - **Model type:** Bayesian Multi-linear
@@ -12,13 +12,16 @@ This Model uses the Food production index based on 2014-1016, the DPT vaccine co
 
 ## Uses
 
-<!-- Address questions around how the model is intended to be used, including the foreseeable users of the model and those affected by the model. -->
 
 ### Direct Use
 
-<!-- This section is for the model use without fine-tuning or plugging into a larger ecosystem/app. -->
+This model could use to generate a prediction of log of Mortality given the three predictors available.
 
-{{ direct_use | default("[More Information Needed]", true)}}
+- **Example code**:
+
+model <- readRDS(file = here::here("models/Mortality_Analysis.rds"))
+
+predict(model, newdata = c(1,1,1))
 
 
 ## Bias, Risks, and Limitations
