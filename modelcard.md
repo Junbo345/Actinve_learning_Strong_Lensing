@@ -8,7 +8,7 @@ This Model uses the Food production index based on 2014-1016, the DPT vaccine co
 
 - **Developed by:** Junbo Li
 - **Model type:** Bayesian Multi-linear
-- **License:** 
+- **License:** [View the License](LICENSE.txt)
 
 ## Uses
 
