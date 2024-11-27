@@ -1,4 +1,4 @@
-# Model Card for Bayesian Multi-linear Model of Under Five Mortality Rate
+# Model Card for Bayesian Multi-linear Model of Under Five Mortality Rate*
 
 ## Model Details
 
@@ -62,12 +62,15 @@ Since we do not have available testing data, we will use Leace One Out Cross Val
 
 #### Metrics
 
-Here the metrics used to test our data is R^2
+Here the metrics used to test our data is R-squared, which represents the proportion of variance explained by our model. 
 
 ### Results
 
-
+The estimated R-squared using LOOCV is 0.789, detailed code is in [view result](scripts/06-model_evaluation.R)
 
 ## Model Card Contact
 
-{{ model_card_contact | default("[More Information Needed]", true)}}
+Junbo Li | junb.li@mail.utoronto.ca
+
+---
+*: This modelcard used the template from: Ozoani, Ezi and Gerchick, Marissa and Mitchell, Margaret. Model Card Guidebook. Hugging Face, 2022. https://huggingface.co/docs/hub/en/model-card-guidebook
