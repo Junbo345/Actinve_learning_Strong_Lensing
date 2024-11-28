@@ -1,5 +1,5 @@
 ---
-title: "Exploring Determinants of Child Mortality (2022): The Role of Vaccination, Healthcare Spending, and Nutrition"
+title: "Exploring Determinants of Child Mortality Globally (2022): The Role of Vaccination, Healthcare Spending, and Nutrition"
 subtitle: "Findings Reveal Vaccination and Healthcare Spending as Key Drivers of Mortality Reduction"
 author: 
   - Junbo Li
@@ -25,7 +25,7 @@ library(tidyverse)
 
 # Introduction
 
-Over the past 30 years, advancements in society and technology have significantly reduced global mortality rates, particularly for children under the age of five. The under-five mortality rate declined from 93 deaths per 1,000 live births in 1990 to 37 deaths per 1,000 live births in 2022 [@worldbank]. This progress represents millions of children who now have better chances of survival, marking a substantial achievement in global health.
+Over the past 30 years, advancements in society and technology have significantly reduced global mortality rates, particularly for children under the age of five. The under-five mortality rate declined from 93 deaths per 1,000 live births in 1990 to 37 deaths per 1,000 live births in 2022 [@worldbank2024M]. This progress represents millions of children who now have better chances of survival, marking a substantial achievement in global health.
 
 In this study, we examined the under-five mortality rate for each country in 2022, focusing on three key factors: food production index, DPT vaccine coverage, and per-capita health expenditure. These factors were chosen because they reflect critical components influencing child mortality. Infectious diseases, such as pneumonia, diarrhea, and malaria, remain the leading causes of under-five deaths, and these are directly linked to vaccination coverage and healthcare spending. Similarly, maternal health during childbirth is influenced by healthcare accessibility and quality, which is often tied to national health expenditures [@who2024childmortality]. While food production does not directly address infectious disease or maternal health, it reflects a nation’s ability to meet nutritional needs, which is critical for preventing malnutrition—a major underlying cause of child deaths (add supporting explanation and citation).
 
@@ -42,7 +42,7 @@ The primary estimand of this study is the effect of three predictors—food prod
 
 ## Overview Check packages
 
-For this analysis, we combined four data sets all together into one. All these four datasets come from **Worldbank** open data platform [@worldbank]. We employed **R** [@citeR], a coding platform to download, clean, and conduct statistical analysis. Besides, we also utilized R packages **tidyverse** [@tidy], **rstanarm** [@rstanarm], **ggplot2** [@gg], **knitr** [@knitr], **arrow** [@arrow], **here** [@here], and **dpylr** [@dplyr]. The paper is outlined in Git Hub using the starter folder provided in **Telling Stories With Data** [@tellingstories].
+For this analysis, we combined four data sets all together into one. All these four datasets are downloaded through **Worldbank Open Data** API [@worldbank]. We employed **R** [@citeR], a coding platform to download, clean, and conduct statistical analysis. Besides, we also utilized R packages **tidyverse** [@tidy], **rstanarm** [@rstanarm], **ggplot2** [@gg], **knitr** [@knitr], **arrow** [@arrow], **here** [@here], **modelsummary** [@ms], and **dpylr** [@dplyr]. The paper is outlined in Git Hub using the starter folder provided in **Telling Stories With Data** [@tellingstories].
 
 ## Measurement
 	
@@ -50,7 +50,7 @@ The analysis in this study relies on four data sets, each collected and prepared
 
 ### Response variable:
 
-**Mortality Rate**: The child mortality rate is estimated by the UN Inter-agency Group for Child Mortality Estimation (IGME). The primary data source is each country's vital registration system. These raw data are then processed using a statistical model developed collaboratively by UN agencies and academic institutions to derive robust mortality rate estimates [@worldbank2024M]. 
+**Mortality Rate**: The child mortality rate is estimated by the UN Inter-agency Group for Child Mortality Estimation (IGME). The primary data source is each country's vital registration system. In countries such system is lacking, household surveys are conducted and then processed using a statistical model developed collaboratively by UN agencies and academic institutions to derive robust mortality rate estimates [@worldbank2024M]. 
 
 ### Predictors:
 
@@ -68,7 +68,7 @@ The Original data range from 0 to 120, with a peak between 10 and 15 deaths per 
 
 ```{r}
 #| label: fig-mor
-#| fig-cap: Data Analysis for Mortality Rate for children under five of Different Countries
+#| fig-cap: Data Analysis for Mortality Rate for children under five of different countries. The histogram on the top left shows that the original distribution is skewed to the right. The histogram on the top right is the distribution after log transformation and is approximately normal.
 #| fig-subcap: ["Dsitribution of Mortality rate before log tranformation", "Distribution of Mortality rate after log transformation"]
 #| echo: false
 #| warning: false
@@ -121,7 +121,7 @@ The three predictors analyzed are:
 The Food Production Index measures the relative level of agricultural production for each country, using the 2014–2016 baseline as a reference point [@worldbank]. This index is price-weighted and reflects agricultural productivity across countries. As illustrated in @fig-food-1, the index ranges from 60 to 180, with a mean of around 110 and an approximately normal distribution. Scatter plot analysis in @fig-food-2 reveals a slightly positive linear relationship between the Food Production Index and the log-transformed mortality rate. This suggests that as agricultural production increases, mortality rates tend to rise modestly, a pattern that warrants further exploration in @sec-model.
 ```{r}
 #| label: fig-food
-#| fig-cap: Data Analysis of Predictor Food Production Index
+#| fig-cap: Data Analysis of Predictor Food Production Index. The histogram on the left shows a approximately normal distrubution. The scatterplot on the right indicates there is a slight positive relationship between Food Production Index and Mortality rate
 #| fig-subcap: ["Counts of Food production index for each country, measured as a basis of 2014-1016", "Relationship of each countries' Food production index VS. Log of Mortality rate"]
 #| echo: false
 #| warning: false
@@ -163,7 +163,7 @@ ggplot(analysis_data, aes(x = Food, y = Mortality)) +
 The Current Health Expenditure per Capita captures health spending in US dollars, calculated under the System of Health Accounts (SHA 2011) framework. The raw data range from $0 to $12,000 and exhibit extreme right skewness, as shown in @fig-health-1. To address this, a log transformation was applied, resulting in a normalized range from 0 to 10, with a central tendency near 6 (@fig-health-2). Analysis of the relationship between log-transformed health expenditure and log mortality rate (@fig-health-3) demonstrates a significant negative linear trend, indicating that higher health expenditures are associated with lower mortality rates. This relationship is examined in greater detail in @sec-model.
 ```{r}
 #| label: fig-health
-#| fig-cap: Data Analysis of Predictor Current Health Expenditure
+#| fig-cap: Data Analysis of health expenses per capita. The histogram on the top left shows that the original distribution is skewed to the right. The histogram on the top right is the distribution after log transformation and is approximately normal.The scatterplot on the bottom left indicates there is a negative relationship between log of health expenses and Mortality rate.
 #| fig-subcap: ["Counts of each countries' Health Expenditure Per Capita, Measured in US$. Before log transformation", "Counts of each countries' Health Expenditure Per Capita, Measured in US$. After log transformation", "Relationship of each countries' Health Expenditure Per Capita, Measured in US$ VS. Log of Mortality"]
 #| echo: false
 #| warning: false
@@ -220,7 +220,7 @@ ggplot(analysis_data, aes(x = Health_expense, y = Mortality)) +
 DPT vaccine coverage rate reflects the percentage of children aged 12–23 months who received vaccinations against diphtheria, pertussis, and tetanus. Coverage ranges from 30% to 100%, with a left-skewed distribution, as depicted in @fig-DPT-1. Analysis of the association between vaccine coverage and mortality rates (@fig-DPT-2) shows a strong negative relationship, suggesting that increased vaccine coverage is correlated with lower mortality rates. This finding will be explored further in @sec-model.
 ```{r}
 #| label: fig-DPT
-#| fig-cap: Data Analysis of Predictor DPT Vaccine Percentage
+#| fig-cap: Data Analysis of DPT vaccine coverage. The histogram on the left shows that the distribution DPT vaccine coverage of is skewed to the left. The scatterplot on the right indicates there is a negative relationship between DPT vaccine coverage and Mortality rate.
 #| fig-subcap: ["Counts of each countries' DPT vaccine percentage", "Relationship of each countries' DPT Vaccine Percentage VS. Log of Mortality"]
 #| echo: false
 #| warning: false
@@ -333,30 +333,20 @@ The coefficient for the log-transformed health expenditure is -0.529, indicating
 #| warning: false
 #| message: false
 #| label: tbl-modelresults
-#| tbl-cap: "Outcome predictors of our model"
+#| tbl-cap: "Explanatory model of Mortality rate for each country based on food production index, DPT vaccine coverage, and health expense"
 
 #### Load libraries ####
 library(tidyverse)
 library(rstanarm)
 library(knitr)
 library(arrow)
+library(modelsummary)
 
 #### Load the saved model ####
 # Load the saved models
 model1 <- readRDS(file = here::here("models/Mortality_Model.rds"))
 
-# Extract a tidy summary of the model
-model_summary <- broom.mixed::tidy(model1, effects = "fixed", conf.int = TRUE) %>%
-  select(term, estimate, std.error, conf.low, conf.high) %>%
-  rename(
-    Term = term,
-    Estimate = estimate,
-    `Std. Error` = std.error,
-    `2.5% CI` = conf.low,
-    `97.5% CI` = conf.high
-  )
-# Display the summary table
-kable(model_summary, digits = 3)
+modelsummary(list("Mortality rate model" = model1), fmt = 4, statistic = c("({conf.low}, {conf.high})"))
 
 ```
 
