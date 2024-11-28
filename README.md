@@ -23,5 +23,5 @@ The repo is structured as:
 
 ## Statement on LLM usage
 
-The R code in scripts and on the paper was written with the help of Chat-GPT4. It is used to generate code and debugging. Also, the paper is written with the help of Chat-GPT4, which was used to create ideas, help conduct data analysis, and fix grammar and logical errors. The complete chat history is in other/llm_usage/usage.txt.
+The R code in scripts and on the paper was written with the help of Chat-GPT4. It is used to generate code and debugging. Also, the paper is written with the help of Chat-GPT4, which was used to create ideas, help conduct data analysis, generate references, and fix grammar and logical errors. The complete chat history is in other/llm_usage/usage.txt.
 
