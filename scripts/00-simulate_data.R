@@ -17,12 +17,12 @@ library(arrow)
 set.seed(123)
 
 # Generate data
-n <- 100  # Number of observations
+n <- 100 # Number of observations
 
 # Generate predictors
-HealthExpenses <- runif(n, 0, 4000)  # Health expenses
-DPTVaccineRate <- runif(n, 0, 100)  # DPT vaccine rate
-FoodProductionIndex <- runif(n, 10, 100)  # Food production index
+HealthExpenses <- runif(n, 0, 4000) # Health expenses
+DPTVaccineRate <- runif(n, 0, 100) # DPT vaccine rate
+FoodProductionIndex <- runif(n, 10, 100) # Food production index
 
 # Create MortalityRate negatively related to the other variables
 MortalityRate <- 100 - 0.01 * HealthExpenses - 0.3 * DPTVaccineRate - 0.2 * FoodProductionIndex + rnorm(n, mean = 0, sd = 5)

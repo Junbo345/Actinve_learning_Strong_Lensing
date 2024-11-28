@@ -32,5 +32,3 @@ saveRDS(
   first_model,
   file = "models/Mortality_Model.rds"
 )
-
-

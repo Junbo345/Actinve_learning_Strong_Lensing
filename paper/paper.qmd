@@ -19,7 +19,6 @@ toc: true
 #| message: false
 
 library(tidyverse)
-
 ```
 
 
@@ -80,7 +79,7 @@ library(ggplot2)
 library(arrow)
 
 # Read the data
-data <- read.csv(file = (here::here('data/01-raw_data/raw_data_Mortality.csv')))
+data <- read.csv(file = (here::here("data/01-raw_data/raw_data_Mortality.csv")))
 
 # Create the histogram
 ggplot(data, aes(x = SH.DYN.MORT)) +
@@ -95,7 +94,7 @@ ggplot(data, aes(x = SH.DYN.MORT)) +
     axis.title = element_text(size = 12)
   )
 
-analysis_data <- read_parquet(file = (here::here('data/02-analysis_data/analysis_data.parquet')))
+analysis_data <- read_parquet(file = (here::here("data/02-analysis_data/analysis_data.parquet")))
 
 # Create the histogram
 ggplot(analysis_data, aes(x = Mortality)) +
@@ -109,7 +108,6 @@ ggplot(analysis_data, aes(x = Mortality)) +
     plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
     axis.title = element_text(size = 12)
   )
-
 ```
 
 
@@ -132,7 +130,7 @@ The Food Production Index measures the relative level of agricultural production
 library(ggplot2)
 library(arrow)
 
-analysis_data <- read_parquet(file = (here::here('data/02-analysis_data/analysis_data.parquet')))
+analysis_data <- read_parquet(file = (here::here("data/02-analysis_data/analysis_data.parquet")))
 
 # Create the histogram
 ggplot(analysis_data, aes(x = Food)) +
@@ -175,9 +173,9 @@ library(ggplot2)
 library(arrow)
 library(knitr)
 
-raw_data <- read.csv(file = (here::here('data/01-raw_data/raw_data_Healthexpense.csv')))
+raw_data <- read.csv(file = (here::here("data/01-raw_data/raw_data_Healthexpense.csv")))
 
-analysis_data <- read_parquet(file = (here::here('data/02-analysis_data/analysis_data.parquet')))
+analysis_data <- read_parquet(file = (here::here("data/02-analysis_data/analysis_data.parquet")))
 
 ggplot(raw_data, aes(x = SH.XPD.CHEX.PC.CD)) +
   geom_histogram(binwidth = 500, fill = "skyblue", color = "black", alpha = 0.7) +
@@ -233,7 +231,7 @@ library(arrow)
 library(knitr)
 library(dplyr)
 
-analysis_data <- read_parquet(file = (here::here('data/02-analysis_data/analysis_data.parquet')))
+analysis_data <- read_parquet(file = (here::here("data/02-analysis_data/analysis_data.parquet")))
 
 # Create the histogram
 ggplot(analysis_data, aes(x = Vacinne)) +
@@ -347,7 +345,6 @@ library(modelsummary)
 model1 <- readRDS(file = here::here("models/Mortality_Model.rds"))
 
 modelsummary(list("Mortality rate model" = model1), fmt = 4, statistic = c("({conf.low}, {conf.high})"))
-
 ```
 
 
