@@ -19,6 +19,12 @@ toc: true
 #| message: false
 
 library(tidyverse)
+library(ggplot2)
+library(arrow)
+library(knitr)
+library(dplyr)
+library(modelsummary)
+library(rstanarm)
 ```
 
 
@@ -74,10 +80,6 @@ The Original data range from 0 to 120, with a peak between 10 and 15 deaths per 
 #| message: false
 #| layout-ncol: 2
 
-# Load necessary libraries
-library(ggplot2)
-library(arrow)
-
 # Read the data
 data <- read.csv(file = (here::here("data/01-raw_data/raw_data_Mortality.csv")))
 
@@ -126,10 +128,6 @@ The Food Production Index measures the relative level of agricultural production
 #| message: false
 #| layout-ncol: 2
 
-# Load necessary libraries
-library(ggplot2)
-library(arrow)
-
 analysis_data <- read_parquet(file = (here::here("data/02-analysis_data/analysis_data.parquet")))
 
 # Create the histogram
@@ -167,11 +165,6 @@ The Current Health Expenditure per Capita captures health spending in US dollars
 #| warning: false
 #| message: false
 #| layout-ncol: 2
-
-# Load necessary libraries
-library(ggplot2)
-library(arrow)
-library(knitr)
 
 raw_data <- read.csv(file = (here::here("data/01-raw_data/raw_data_Healthexpense.csv")))
 
@@ -224,12 +217,6 @@ DPT vaccine coverage rate reflects the percentage of children aged 12–23 month
 #| warning: false
 #| message: false
 #| layout-ncol: 2
-
-# Load necessary libraries
-library(ggplot2)
-library(arrow)
-library(knitr)
-library(dplyr)
 
 analysis_data <- read_parquet(file = (here::here("data/02-analysis_data/analysis_data.parquet")))
 
@@ -332,13 +319,6 @@ The coefficient for the log-transformed health expenditure is -0.529, indicating
 #| message: false
 #| label: tbl-modelresults
 #| tbl-cap: "Explanatory model of Mortality rate for each country based on food production index, DPT vaccine coverage, and health expense"
-
-#### Load libraries ####
-library(tidyverse)
-library(rstanarm)
-library(knitr)
-library(arrow)
-library(modelsummary)
 
 #### Load the saved model ####
 # Load the saved models
