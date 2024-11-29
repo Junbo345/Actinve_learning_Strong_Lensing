@@ -6,7 +6,7 @@ author:
 thanks: "Code and data are available at: [https://github.com/Junbo345/Mortality_analysis]."
 date: today
 date-format: long
-abstract: "Child mortality has significantly decreased over the past three decades, but progress remains uneven across regions. This study examines the under-five mortality rates of 2022, focusing on the effects of vaccination coverage, health expenditure per capita, and food production indices. Using a Bayesian modeling approach, we found that increased vaccination coverage and healthcare spending significantly reduce child mortality, while food production had no direct impact. These findings underscore the critical need for targeted interventions in high-mortality regions, emphasizing the importance of vaccination programs and healthcare funding in achieving global child survival goals."
+abstract: "Child mortality has significantly decreased over the past three decades, but progress remains uneven across regions. This study examines the under-five mortality rates of 2022 for each country, focusing on the effects of DPT vaccination coverage, health expenditure per capita, and food production indices. Using a Bayesian multi-linear modeling approach, we found that increased vaccination coverage and healthcare spending significantly reduce child mortality, while food production had no direct impact. These findings underscore the need for targeted interventions in high-mortality regions, suggesting the importance of vaccination programs and healthcare funding in achieving global child survival goals."
 format: pdf
 number-sections: true
 bibliography: references.bib
@@ -44,9 +44,11 @@ The remainder of this paper is organized as follows. @sec-data describes the dat
 
 # Data {#sec-data}
 
-## Overview Check packages
+## Overview
 
-For this analysis, we used four datasets: child mortality rate, food production index, DPT vaccine coverage rate, and health expense per capita. All four datasets are downloaded through **Worldbank Open Data** API [@worldbank]. We employed **R** [@citeR], a coding platform to download, clean, and conduct statistical analysis. Besides, we also utilized R packages **tidyverse** [@tidy], **rstanarm** [@rstanarm], **ggplot2** [@gg], **knitr** [@knitr], **arrow** [@arrow], **here** [@here], **modelsummary** [@ms], and **dpylr** [@dplyr]. The paper is outlined in Git Hub using the starter folder provided in **Telling Stories With Data** [@tellingstories].
+For this analysis, we used four datasets: child mortality rate, food production index, DPT vaccine coverage rate, and health expense per capita. All four datasets are downloaded through **Worldbank Open Data** API [@worldbank]. World Bank Open Data platform is a comprehensive resource offering free and publicly accessible development data from nearly every country. This platform provides an extensive range of indicators across sectors such as health, agriculture, and education, enabling researchers to access globally standardized data for comparative analysis. The platform ensures transparency and usability by offering tools for visualization, data export, and API integration, making it a reliable and versatile resource for exploring global trends.
+
+We employed **R** [@citeR], a coding platform to download, clean, and conduct statistical analysis. Besides, we also utilized R packages **tidyverse** [@tidy], **rstanarm** [@rstanarm], **ggplot2** [@gg], **knitr** [@knitr], **arrow** [@arrow], **here** [@here], **modelsummary** [@ms], and **dpylr** [@dplyr]. The paper is outlined in Git Hub using the starter folder provided in **Telling Stories With Data** [@tellingstories].
 
 ## Measurement
 	
@@ -292,25 +294,30 @@ Several limitations are noted in this model:
 
 3. Simplified Assumptions: The model assumes linearity and does not capture potential non-linear interactions or regional variations that could influence under-five mortality rates.
 
+## Model Validation
+The posterior and prior predictive checks are presented in @fig-ppcheckandposteriorvsprior-1. We observe an excellent fit between the posterior distribution from our model and the actual child mortality data, indicating that the model effectively captures the underlying trends in child mortality rates. In @fig-ppcheckandposteriorvsprior-2, we compare the posterior distribution with the prior. No significant deviations are observed, suggesting alignment between our prior beliefs and the posterior distribution.
+
+@fig-stanareyouokay-1 displays the trace plot check, where no irregularities or concerning patterns are detected. Finally, the R-hat plot (@fig-stanareyouokay-2) shows all values close to one, confirming the convergence of the Markov chains. Detailed information could be foun in @sec-model-details.
+
 
 # Results {#sec-results}
 
-# Model outcome
+## Model outcome
 
 Our model results are summarized in @tbl-modelresults .We will discuss them one by one
 
-## Intercept:
+### Intercept:
 The intercept estimate of 6.643 represents the expected logarithm of the under-five mortality rate when all predictors are held constant at their reference or baseline values (e.g., average food production, average vaccine coverage, and average health expenditure).
 
-## Food Production Index:
+### Food Production Index:
 The coefficient for the food production index is 0.003, indicating a very slight positive relationship between food production and the under-five mortality rate. This naively suggests that reducing food production could also reduce mortality, which is counter-intuitive.
 
 However, a closer examination of the confidence interval for this predictor shows that it includes 0. This implies that the relationship is not statistically significant, so we conclude that food production is not strongly related to overall under-five mortality rates.
 
-## Vaccine Coverage:
+### Vaccine Coverage:
 The coefficient for vaccine coverage is -0.013, meaning that for every 1 percentage point increase in vaccine coverage, the logarithm of the under-five mortality rate decreases by 1.3%, holding other variables constant.
 
-## Health Expenditure (Log-Transformed):
+### Health Expenditure (Log-Transformed):
 The coefficient for the log-transformed health expenditure is -0.529, indicating that a 1% increase in health expenditure per capita is associated with a 0.529 unit decrease in the log of the under-five mortality rate, holding all other predictors constant.
 
 ```{r}
@@ -327,12 +334,6 @@ model1 <- readRDS(file = here::here("models/Mortality_Model.rds"))
 
 modelsummary(list("Mortality rate model" = model1), fmt = 4, statistic = c("({conf.low}, {conf.high})"))
 ```
-
-
-# Model Validation
-The posterior and prior predictive checks are presented in @fig-ppcheckandposteriorvsprior-1. We observe an excellent fit between the posterior distribution from our model and the actual child mortality data, indicating that the model effectively captures the underlying trends in child mortality rates. In @fig-ppcheckandposteriorvsprior-2, we compare the posterior distribution with the prior. No significant deviations are observed, suggesting alignment between our prior beliefs and the posterior distribution.
-
-@fig-stanareyouokay-1 displays the trace plot check, where no irregularities or concerning patterns are detected. Finally, the R-hat plot (@fig-stanareyouokay-2) shows all values close to one, confirming the convergence of the Markov chains. 
 
 
 # Discussion {#sec-diss}
