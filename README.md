@@ -2,7 +2,7 @@
 
 ## Overview
 
-This repo contains code, data, and analysis of the five Mortality Rates in the year 2022. It was created by Junbo Li. We used data available on the Wold Bank open-data platform and used a multi-linear Bayesian model to analyze it. 
+This repo contains code, data, and analysis of the five Mortality Rates in the year 2022. It was created by Junbo Li. We used data available on the World Bank open-data platform and used a multi-linear Bayesian model to analyze it. 
 
 
 ## File Structure
@@ -23,5 +23,5 @@ The repo is structured as:
 
 ## Statement on LLM usage
 
-The R code in scripts and on the paper was written with the help of Chat-GPT4. It is used to generate code and debugging. Also, the paper is written with the help of Chat-GPT4, which was used to create ideas, help conduct data analysis, generate references, and fix grammar and logical errors. The complete chat history is in `other/llm_usage/usage.txt`.
+The R code in the `scripts` and `paper` folders was written with the help of Chat-GPT4. It is used to generate code and debugging. Also, Chat-GPT4 is used to write the paper, including conducting data analysis, generating references, and improving grammar and logical errors. The complete chat history is in `other/llm_usage/usage.txt`.
 
