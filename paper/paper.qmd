@@ -30,13 +30,13 @@ library(rstanarm)
 
 # Introduction
 
-Over the past 30 years, advancements in society and technology have significantly reduced global mortality rates, particularly for children under the age of five. The under-five mortality rate declined from 93 deaths per 1,000 live births in 1990 to 37 deaths per 1,000 live births in 2022 [@worldbank2024M]. This progress represents millions of children who now have better chances of survival, marking a substantial achievement in global health.
+Over the past 30 years, advancements in society and technology have significantly reduced global mortality rates, particularly for children under the age of five (child mortality). The child mortality rate declined from 93 deaths per 1,000 live births in 1990 to 37 deaths per 1,000 live births in 2022 [@worldbank2024M]. This progress represents millions of children who now have better chances of survival, marking a substantial achievement in global health.
 
-In this study, we examined the under-five mortality rate for each country in 2022, focusing on three key factors: food production index, DPT vaccine coverage, and per-capita health expenditure. These factors were chosen because they reflect critical components influencing child mortality. Infectious diseases, such as pneumonia, diarrhea, and malaria, remain the leading causes of under-five deaths, and these are directly linked to vaccination coverage and healthcare spending. Similarly, maternal health during childbirth is influenced by healthcare accessibility and quality, which is often tied to national health expenditures [@who2024childmortality]. While food production does not directly address infectious disease or maternal health, it reflects a nation’s ability to meet nutritional needs, which is critical for preventing malnutrition—a major underlying cause of child deaths (add supporting explanation and citation).
+Despite this progress, the pace of reduction has slowed considerably since 2015, decreasing from an annual rate of 3.8% during the Millennium Development Goal (MDG) era (2000–2015) to 2.1% during the Sustainable Development Goal (SDG) era (2015–2022) [@unicef2022underfive]. In 2022 alone, 4.9 million children under the age of five died, equating to approximately 13,400 deaths per day [@unicef2022underfive]. Moreover, the distribution of mortality rates under five remains highly uneven. Developed countries such as Canada and the United States report mortality rates as low as 10 per 1,000 live births, while developing nations—particularly in sub-Saharan Africa—experience rates exceeding 100 per 1,000 live births [@worldbank]. This stark disparity underscores the urgent need for targeted interventions in high-mortality regions.
 
-Our findings reveal that increasing vaccine coverage and per-capita health expenditures significantly reduce under-five mortality rates. However, the food production index does not exhibit a direct impact, suggesting that its role is mediated by other factors such as distribution systems and food quality. Despite progress in reducing global mortality, the pace of reduction has slowed considerably since 2015, decreasing from an annual rate of 3.8% during the Millennium Development Goal (MDG) era (2000–2015) to 2.1% during the Sustainable Development Goal (SDG) era (2015–2022) [@unicef2022underfive]. In 2022 alone, 4.9 million children under the age of five died, equating to approximately 13,400 deaths per day [@unicef2022underfive].
+Infectious diseases, such as pneumonia, diarrhea, and malaria, remain the leading causes of under-five deaths, closely tied to vaccination coverage and healthcare spending. Maternal health is also influenced by healthcare accessibility and quality, which often correlates with national health expenditures [@who2024childmortality]. While food production does not directly address these issues, it reflects a nation’s ability to meet nutritional needs, a critical factor in preventing malnutrition—a major contributor to child mortality.
 
-Furthermore, the distribution of mortality rates under five remains highly uneven. Developed countries such as Canada and the United States report mortality rates as low as 10 per 1,000 live births while developing nations—particularly in sub-Saharan Africa—experience rates exceeding 100 per 1,000 live births (@worldbank). This disparity highlights the urgent need for targeted interventions in high-mortality regions. The factors studied in this paper, such as vaccination and healthcare spending, are actionable and can be effectively improved in these regions through foreign aid and international collaboration.
+In this study, we examined the child mortality rate for each country in 2022, focusing on three key factors: food production index, DPT vaccine coverage, and per-capita health expenditure. Our findings reveal that increasing vaccine coverage and per-capita health expenditures significantly reduce under-five mortality rates. However, the food production index does not exhibit a direct impact, suggesting its role is mediated by factors such as food quality and distribution systems.
 
 The estimand of this study is the effect of three predictors—food production index, vaccination coverage (DPT vaccine percentage), and per-capita health expenditure (log-transformed)—on the logarithm of the under-five mortality rate for each country in 2022. This analysis seeks to quantify the extent to which these factors contribute to variations in mortality rates across nations. By addressing these relationships, the study aims to identify potential intervention points for reducing preventable child deaths and achieving progress toward the Sustainable Development Goals for child survival.
 
@@ -46,15 +46,15 @@ The remainder of this paper is organized as follows. @sec-data describes the dat
 
 ## Overview Check packages
 
-For this analysis, we combined four data sets all together into one. All these four datasets are downloaded through **Worldbank Open Data** API [@worldbank]. We employed **R** [@citeR], a coding platform to download, clean, and conduct statistical analysis. Besides, we also utilized R packages **tidyverse** [@tidy], **rstanarm** [@rstanarm], **ggplot2** [@gg], **knitr** [@knitr], **arrow** [@arrow], **here** [@here], **modelsummary** [@ms], and **dpylr** [@dplyr]. The paper is outlined in Git Hub using the starter folder provided in **Telling Stories With Data** [@tellingstories].
+For this analysis, we used four datasets: child mortality rate, food production index, DPT vaccine coverage rate, and health expense per capita. All four datasets are downloaded through **Worldbank Open Data** API [@worldbank]. We employed **R** [@citeR], a coding platform to download, clean, and conduct statistical analysis. Besides, we also utilized R packages **tidyverse** [@tidy], **rstanarm** [@rstanarm], **ggplot2** [@gg], **knitr** [@knitr], **arrow** [@arrow], **here** [@here], **modelsummary** [@ms], and **dpylr** [@dplyr]. The paper is outlined in Git Hub using the starter folder provided in **Telling Stories With Data** [@tellingstories].
 
 ## Measurement
 	
-The analysis in this study relies on four data sets, each collected and prepared by various UN-affiliated organizations. Below, we provide a brief overview of the measurement and transformation processes for these data sets. Detailed descriptions and methodological specifics can be found in @sec-methods.
+The datasets of this analysis are collected and prepared by various UN-affiliated organizations. Below, we provide a brief overview of the measurement and transformation processes for these data sets. Detailed descriptions and methodological specifics can be found in @sec-methods.
 
 ### Response variable:
 
-**Mortality Rate**: The child mortality rate is estimated by the UN Inter-agency Group for Child Mortality Estimation (IGME). The primary data source is each country's vital registration system. In countries such system is lacking, household surveys are conducted and then processed using a statistical model developed collaboratively by UN agencies and academic institutions to derive robust mortality rate estimates [@worldbank2024M]. 
+**Mortality Rate**: The child mortality rate is estimated by the UN Inter-agency Group for Child Mortality Estimation (IGME). The primary data source is each country's vital registration system. In countries such system is lacking, household surveys are conducted and then processed using a statistical model developed collaboratively by UN agencies and academic institutions to derive an estimate for mortality rate [@worldbank2024M]. 
 
 ### Predictors:
 
@@ -66,9 +66,9 @@ The analysis in this study relies on four data sets, each collected and prepared
 
 ## Outcome variables
 
-The response variable in this study is the under-five mortality rate, measured as the number of deaths of children under five years old per 1,000 live births.
+The response variable in this study is the child mortality rate in each country in year 2022, measured as the number of deaths of children under five years old per 1,000 live births in year 2022.
 
-The Original data range from 0 to 120, with a peak between 10 and 15 deaths per 1,000 live births (@fig-mor-1). Due to extreme values and significant right skewness, a log transformation was applied to stabilize variance and improve normality. The transformed data range from 2 to 5, with a peak near 3 (@fig-mor-2).
+The Original data range from 0 to 120, with a peak between 10 and 15 deaths per 1,000 live births (@fig-mor-1). Due to extreme values and significant right skewness, a log transformation was applied to stabilize variance and improve normality. The transformed data range from 2 to 5, with a peak near 3, and the shape is approximately normal. (@fig-mor-2).
 
 ```{r}
 #| label: fig-mor
@@ -117,10 +117,10 @@ ggplot(analysis_data, aes(x = Mortality)) +
 The three predictors analyzed are:
 
 **Food Production Index:** 
-The Food Production Index measures the relative level of agricultural production for each country, using the 2014–2016 baseline as a reference point [@worldbank]. This index is price-weighted and reflects agricultural productivity across countries. As illustrated in @fig-food-1, the index ranges from 60 to 180, with a mean of around 110 and an approximately normal distribution. Scatter plot analysis in @fig-food-2 reveals a slightly positive linear relationship between the Food Production Index and the log-transformed mortality rate. This suggests that as agricultural production increases, mortality rates tend to rise modestly, a pattern that warrants further exploration in @sec-model.
+The Food Production Index measures the relative level of agricultural production for each country in year 2022, using the 2014–2016 baseline as a reference point [@worldbank]. This index is price-weighted and reflects agricultural productivity across countries. As illustrated in @fig-food-1, the index ranges from 60 to 180, with a mean of around 110 and an approximately normal distribution. Scatter plot between food production index and log of child mortality in @fig-food-2 shows a slightly positive linear relationship.This relationship is examined in greater detail in @sec-results.
 ```{r}
 #| label: fig-food
-#| fig-cap: Data Analysis of Predictor Food Production Index. The histogram on the left shows a approximately normal distrubution. The scatterplot on the right indicates there is a slight positive relationship between Food Production Index and Mortality rate
+#| fig-cap: Data Analysis of Predictor Food Production Index. The histogram on the left shows a approximately normal distrubution. The scatterplot on the right indicates there is a slight positive relationship between food production index and mortality rate
 #| fig-subcap: ["Counts of Food production index for each country, measured as a basis of 2014-1016", "Relationship of each countries' Food production index VS. Log of Mortality rate"]
 #| echo: false
 #| warning: false
@@ -155,7 +155,7 @@ ggplot(analysis_data, aes(x = Food, y = Mortality)) +
   )
 ```
 **Current Health Expenditure:**
-The Current Health Expenditure per Capita captures health spending in US dollars, calculated under the System of Health Accounts (SHA 2011) framework. The raw data range from $0 to $12,000 and exhibit extreme right skewness, as shown in @fig-health-1. To address this, a log transformation was applied, resulting in a normalized range from 0 to 10, with a central tendency near 6 (@fig-health-2). Analysis of the relationship between log-transformed health expenditure and log mortality rate (@fig-health-3) demonstrates a significant negative linear trend, indicating that higher health expenditures are associated with lower mortality rates. This relationship is examined in greater detail in @sec-model.
+The Current Health Expenditure per Capita captures health spending in US dollars for each individual in year 2021, calculated under the System of Health Accounts (SHA 2011) framework. The raw data range from $0 to $12,000 and exhibit extreme right skewness, as shown in @fig-health-1. To address this, a log transformation was applied, resulting in a normalized range from 0 to 10, with a central tendency near 6 (@fig-health-2). Analysis of the relationship between log-transformed health expenditure and log mortality rate (@fig-health-3) demonstrates a significant negative linear trend, indicating that higher health expenditures are associated with lower mortality rates. This relationship is examined in greater detail in @sec-results.
 ```{r}
 #| label: fig-health
 #| fig-cap: Data Analysis of health expenses per capita. The histogram on the top left shows that the original distribution is skewed to the right. The histogram on the top right is the distribution after log transformation and is approximately normal.The scatterplot on the bottom left indicates there is a negative relationship between log of health expenses and Mortality rate.
@@ -207,7 +207,7 @@ ggplot(analysis_data, aes(x = Health_expense, y = Mortality)) +
   )
 ```
 **DPT Vaccine Coverage:**
-DPT vaccine coverage rate reflects the percentage of children aged 12–23 months who received vaccinations against diphtheria, pertussis, and tetanus. Coverage ranges from 30% to 100%, with a left-skewed distribution, as depicted in @fig-DPT-1. Analysis of the association between vaccine coverage and mortality rates (@fig-DPT-2) shows a strong negative relationship, suggesting that increased vaccine coverage is correlated with lower mortality rates. This finding will be explored further in @sec-model.
+DPT vaccine coverage rate reflects the percentage of children aged 12–23 months who received vaccinations against diphtheria, pertussis, and tetanus in year 2022. Coverage ranges from 30% to 100%, with a left-skewed distribution, as depicted in @fig-DPT-1. Analysis of the association between vaccine coverage and mortality rates (@fig-DPT-2) shows a strong negative relationship, suggesting that increased vaccine coverage is correlated with lower mortality rates. This finding will be explored further in @sec-model.
 ```{r}
 #| label: fig-DPT
 #| fig-cap: Data Analysis of DPT vaccine coverage. The histogram on the left shows that the distribution DPT vaccine coverage of is skewed to the left. The scatterplot on the right indicates there is a negative relationship between DPT vaccine coverage and Mortality rate.
@@ -247,13 +247,13 @@ ggplot(analysis_data, aes(x = Vacinne, y = Mortality)) +
 ## Missing Data and Time Inconsistancy {#sec-data-missing}
 The health expenditure variable was collected in 2021, while other variables reflect 2022 data. This discrepancy is due to the unavailability of more recent health expenditure data. These 2021 values are assumed to approximate 2022 conditions sufficiently for analysis.
 
-Additionally, some smaller countries lacked complete data and were excluded from the analysis. The implications of these omissions are addressed in @sec-results.
+Additionally, some countries' data are not collected and were excluded from the analysis. The implications of these omissions and time inconsistancy are addressed in @sec-lim.
 
 
 
 # Model {#sec-model}
 
-Our modeling strategy aims to explore the relationships between DPT vaccine coverage, the food production index, and current health expenditure per capita (in current US$) with the under-five mortality rate across nations. By analyzing these factors, we seek to identify opportunities to improve child health outcomes, particularly in countries with high mortality rates. Supporting background information and diagnostics are provided in [Appendix -@sec-model-details].
+Our modeling strategy aims to explore the relationships between DPT vaccine coverage, the food production index, and current health expenditure per capita (in current US$) with the under-five mortality rate across nations. By analyzing these factors, we seek to identify opportunities to improve child health outcomes, particularly in countries with high mortality rates. Supporting model diagnostics are provided in [Appendix -@sec-model-details].
 
 ## Model set-up
 
@@ -274,28 +274,30 @@ u_i &= \alpha + \beta_1 x_{1i} + \beta_2 x_{2i} + \beta_3 x_{3i} \\
 \sigma &\sim \mbox{Exponential}(1) 
 \end{align}
  
-We implement this model in R [@citeR] using the rstanarm package [@rstanarm].
+We implement this model in **R** [@citeR] using the **rstanarm**  [@rstanarm] and **arrow** [@arrow] package.
 
 
 ### Model justification
 
 A Bayesian multivariate linear model was chosen to capture the relationships between the predictors (DPT vaccine coverage, food production index, and current health expenditure) and the response variable (under-five mortality rate). This choice is supported by observed linear trends between each predictor and response in @sec-data. Logarithmic transformations were applied to the under-five mortality rate and current health expenditure per capita to normalize the distributions and stabilize their linear relationships with the predictors.
 
-Default Bayesian priors were used for the predictors, as they provide a robust starting point. For the intercept term, a \mbox{Normal}(2.5, 1) prior was chosen, reflecting the observed distribution of the response variable (see @sec-data). 
+Default Bayesian priors were used for the predictors, as they provide a robust starting point. For the intercept term, a \mbox{Normal}(2.5, 1) prior was chosen, reflecting the observed distribution of the response variable (@fig-mor-1). 
 
 ### Model weakness
 Several limitations are noted in this model:
 
 1. Skewed Predictor Distribution: The distribution of DPT vaccine coverage is skewed left, which may introduce bias. Despite attempts to address this, an ideal solution remains elusive.
 
-2. Potential Collinearity: While each predictor shows an individual linear relationship with the response variable, interdependencies between predictors may affect model accuracy.
+2. Potential Collinearity: While each predictor shows an individual linear relationship with the response variable, dependencies between predictors may affect model accuracy.
 
 3. Simplified Assumptions: The model assumes linearity and does not capture potential non-linear interactions or regional variations that could influence under-five mortality rates.
 
 
 # Results {#sec-results}
 
-Our results are summarized in @tbl-modelresults.
+# Model outcome
+
+Our model results are summarized in @tbl-modelresults .We will discuss them one by one
 
 ## Intercept:
 The intercept estimate of 6.643 represents the expected logarithm of the under-five mortality rate when all predictors are held constant at their reference or baseline values (e.g., average food production, average vaccine coverage, and average health expenditure).
@@ -327,7 +329,10 @@ modelsummary(list("Mortality rate model" = model1), fmt = 4, statistic = c("({co
 ```
 
 
+# Model Validation
+The posterior and prior predictive checks are presented in @fig-ppcheckandposteriorvsprior-1. We observe an excellent fit between the posterior distribution from our model and the actual child mortality data, indicating that the model effectively captures the underlying trends in child mortality rates. In @fig-ppcheckandposteriorvsprior-2, we compare the posterior distribution with the prior. No significant deviations are observed, suggesting alignment between our prior beliefs and the posterior distribution.
 
+@fig-stanareyouokay-1 displays the trace plot check, where no irregularities or concerning patterns are detected. Finally, the R-hat plot (@fig-stanareyouokay-2) shows all values close to one, confirming the convergence of the Markov chains. 
 
 
 # Discussion {#sec-diss}
@@ -343,7 +348,7 @@ To achieve the SDG targets, concerted efforts are essential, particularly throug
 
 Numerous studies have explored the determinants of child mortality, consistently finding a negative correlation between mortality rates and macroeconomic indicators such as GDP [@ohare2013income] or education levels [@sartorius2014global]. However, many of these factors are not direct causes of child mortality.
 
-For instance, during the Great Recession, the United States experienced a reduction in mortality rates due to decreased air pollution following widespread factory closures [@finkelstein2024lives]. This demonstrates the importance of identifying underlying causes rather than focusing solely on broad economic indicators. In low-income countries, the primary drivers of high child mortality rates are often basic issues such as malnutrition and inadequate access to primary healthcare [@DOERR2022110860]. Addressing these root causes is crucial to achieving meaningful and sustainable improvements. 
+For instance, during the Great Recession, the United States experienced a reduction in mortality rates due to decreased air pollution following widespread factory closures [@finkelstein2024lives]. This demonstrates the importance of identifying underlying causes rather than focusing solely on broad economic indicators. In low-income countries, the primary drivers of high child mortality rates are often basic issues such as malnutrition and inadequate access to primary healthcare [@DOERR2022110860]. Addressing such root causes is crucial to achieving meaningful and sustainable improvements. 
 
 Our analysis identifies two factors with strong negative correlations to child mortality rates: DPT vaccine coverage and healthcare spending. However, it remains essential to determine whether these factors exert a direct influence or are proxies for other underlying variables.
 
@@ -357,16 +362,16 @@ Public healthcare systems are often funded through tax revenues, which are tied 
 
 ## Conclusion
 
-Our study shows that reducing child mortality rate requires a dual focus on expanding vaccination coverage and optimizing healthcare spending. Vaccination programs, particularly for diseases like diphtheria, pertussis, and tetanus, represent a direct and impactful strategy for reducing child mortality. Simultaneously, enhancing public healthcare spending can address systemic issues such as inadequate maternal care and limited access to trained professionals.
+Our study shows that reducing child mortality rate requires a dual focus on expanding vaccination coverage and optimizing healthcare spending. Vaccination programs, particularly for diseases like diphtheria, pertussis, and tetanus, represent a direct strategy for reducing child mortality. Simultaneously, enhancing public healthcare spending can address systemic issues such as inadequate maternal care and limited access to trained professionals.
 
-Efforts must be tailored to the specific needs and capacities of individual countries. International organizations can play a pivotal role by providing financial support, technical expertise, and policy guidance to countries with high child mortality rates. By prioritizing interventions with clear and measurable impacts, the global community can move closer to the goal of ensuring that no child dies from preventable causes.
+Oh the other hand, efforts must be tailored to the specific needs and capacities of individual countries. International organizations can play a pivotal role by providing financial support, technical expertise, and policy guidance to countries with high child mortality rates. By prioritizing interventions with clear and measurable impacts, the global community can move closer to the goal of ensuring that no child dies from preventable causes.
 
-## Limitation and next steps
-This study has several limitations that should be considered in future research. First, as noted in @sec-data-missing, data from several countries is unavailable. While these nations have minimal populations, excluding them introduces potential biases and raises ethical concerns by overlooking their unique challenges. Second, the most recent data used in this study is from 2022. Access to more current data sets would enable a more accurate and relevant analysis, reflecting recent developments in healthcare and child mortality trends.
+## Limitation and next steps {#sec-lim}
+This study has several limitations that warrant consideration in future research. First, as discussed in @sec-data-missing, data from several countries is unavailable. While these nations typically have smaller populations, their exclusion may introduce biases and raises ethical concerns by neglecting their unique challenges. Second, the most recent data used in this study is from 2022, and there are temporal inconsistencies among the predictors. This is particularly important because both the predictors and the response variable are time-sensitive. Access to more current and synchronized datasets would enable a more accurate and relevant analysis, reflecting recent developments in healthcare and child mortality trends.
 
-Additionally, while this study focused on three primary predictors, the dataset includes other indicators that could potentially enrich the analysis. Unfortunately, many of these indicators suffer from missing or outdated values, limiting their utility. Future research should prioritize data completeness and timeliness to improve model robustness and reliability.
+Additionally, while this study focused on three primary predictors, the dataset contains other indicators that could potentially enhance the analysis. However, many of these indicators are affected by missing or outdated values, limiting their utility. Future research should prioritize addressing data completeness and timeliness to improve model robustness and reliability.
 
-Finally, advanced modeling techniques and the inclusion of additional predictors could yield deeper insights. Future studies should explore innovative models to better capture complex relationships and interactions, offering more nuanced recommendations for policy interventions.
+Finally, incorporating advanced modeling techniques and additional predictors could provide deeper insights. Future studies should explore innovative models to better capture complex relationships and interactions, enabling more nuanced and actionable recommendations for policy interventions.
 
 
 \newpage
