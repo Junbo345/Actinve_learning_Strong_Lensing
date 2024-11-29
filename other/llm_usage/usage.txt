@@ -4766,3 +4766,25 @@ Here’s a polished and professional paragraph for an overview of the World Bank
 The datasets used in this analysis were sourced from the World Bank Open Data platform, a comprehensive resource offering free and publicly accessible development data from nearly every country. This platform provides an extensive range of indicators across sectors such as health, agriculture, and education, enabling researchers to access globally standardized data for comparative analysis. The platform ensures transparency and usability by offering tools for visualization, data export, and API integration, making it a reliable and versatile resource for exploring global trends. By leveraging data curated by reputable organizations and adhering to consistent methodologies, the World Bank Open Data platform facilitates evidence-based policymaking and research aimed at addressing global challenges.
 
 This aligns with the professional tone of your paper and effectively contextualizes the platform's relevance to your research.
+
+
+
+
+
+You said:
+reference. bib for this link: https://data.worldbank.org/
+
+ChatGPT said:
+ChatGPT
+Here’s a sample BibTeX reference for the World Bank Data website:
+
+bibtex
+Copy code
+@misc{worldbank_data,
+  author       = {{The World Bank}},
+  title        = {World Bank Open Data},
+  year         = {2024},
+  url          = {https://data.worldbank.org/},
+  note         = {Accessed: 2024-11-29}
+}
+Make sure to adjust the year and note fields based on the date you accessed the website!
