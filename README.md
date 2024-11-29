@@ -2,12 +2,12 @@
 
 ## Overview
 
-This repo contains code, data, and analysis of the five Mortality Rates in the year 2022. It was created by Junbo Li. We used data available on the World Bank open-data platform and used a multi-linear Bayesian model to analyze it. 
+This repo contains code, data, and an analysis of the relationship between food production, DPT vaccination, health expenses, and child mortality rates in the year 2022 worldwide. It was created by Junbo Li. We employed data available on the World Bank open database and used a multi-linear Bayesian model to analyze it. 
 
 
 ## File Structure
 
-The repo is structured as:
+The repo is structured as follows:
 
 -   `data/00-simulated_data` contains the simulated data that mimics the data we will use.
 -   `data/01-raw_data` contains the raw data as obtained from the World Bank open-data platform.
