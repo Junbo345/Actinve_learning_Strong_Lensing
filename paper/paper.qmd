@@ -3,7 +3,7 @@ title: "Exploring Determinants of Child Mortality Globally (2022): The Role of V
 subtitle: "Findings Reveal Vaccination and Healthcare Spending as Key Drivers of Mortality Reduction"
 author: 
   - Junbo Li
-thanks: "Code and data are available at: [https://github.com/Junbo345/Mortality_analysis]."
+thanks: "Code and data are available at: [https://github.com/Junbo345/Mortality_analysis](https://github.com/Junbo345/Mortality_analysis)."
 date: today
 date-format: long
 abstract: "Child mortality has significantly decreased over the past three decades, but progress remains uneven across regions. This study examines the under-five mortality rates of 2022 for each country, focusing on the effects of DPT vaccination coverage, health expenditure per capita, and food production indices. Using a Bayesian multi-linear modeling approach, we found that increased vaccination coverage and healthcare spending significantly reduce child mortality, while food production had no direct impact. These findings underscore the need for targeted interventions in high-mortality regions, suggesting the importance of vaccination programs and healthcare funding in achieving global child survival goals."
