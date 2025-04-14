@@ -38,7 +38,7 @@ However, we are still facing another problem which is the imbalanced data. the s
 
 The remainder of this paper is organized as follows. @sec-method describes possible losses functions we incorporate into our model. @sec-metric introduces the new metrics we incorporated @sec-results presents the results of new losses and evaluation metric. Finally, @sec-diss discusses the implications of the findings, the limitations of the study, and recommendations for future research in finding strong lensing data.
 
-# Method
+# Method {#sec-method}
 
 To test the new metric and loss functions, we use the available strong lensing data for regression. We concatenate the features extracted from the CNN and contatenate them with the expert labels for regression. The result data has a total of ~ and ~ strong lenseing ones.
 
@@ -48,7 +48,7 @@ Here we will investigate two loss functions, ranknet loss and focal loss. Rankne
 $$
 L = \sum_{i < j} - y_{ij} \log P(i > j) - (1 - y_{ij}) \log (1 - P(i > j))
 $$
-Where $y_ij$ is 1 if $x_i$ is ranked higher than $y_j$, 0 if $x_i$ is ranked lower than $y_j$ (here we will assume no $x_i$ can have the same ranking as $x_j$ if i is not equal to j). $ P(i > j) = \frac{1}{1 + e^{-(s(x_i) - s(x_j))}} $ is the probability that $ x_i $ is ranked higher than $ x_j $. s() is the rankning score assigned to i, higher s higher ranking. 
+Where $y_ij$ is 1 if $x_i$ is ranked higher than $y_j$, 0 if $x_i$ is ranked lower than $y_j$ (here we will assume no $x_i$ can have the same ranking as $x_j$ if i is not equal to j). $P(i > j) = \frac{1}{1 + e^{-(s(x_i) - s(x_j))}}$ is the probability that $x_i$ is ranked higher than $x_j$. s() is the rankning score assigned to i, higher ranking cores means higher ranking. This loss aims to peanalize the pairs of data $x_i$ and $x_j$ where $x_i$ should be ranked higher than $x_j$ but instead $x_i$ is ranked lower by the model for $x_j$.   
 
 
 Over the past 30 years, advancements in society and technology have significantly reduced global mortality rates, particularly for children under the age of five (child mortality). The child mortality rate declined from 93 deaths per 1,000 live births in 1990 to 37 deaths per 1,000 live births in 2022 [@worldbank2024M]. This progress represents millions of children who now have better chances of survival, marking a substantial achievement in global health.
