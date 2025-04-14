@@ -44,8 +44,11 @@ To test the new metric and loss functions, we use the available strong lensing d
 
 ## New loss function
 
-Here we will investigate two loss functions, ranknet loss and focal loss. 
-
+Here we will investigate two loss functions, ranknet loss and focal loss. Ranknet loss is sepcified as follow: Given training data $x_1$, $x_2$, .... , $x_n$, and their rankings, $y_1$, $y_2$, ..., $y_n$, we will investigate all combinations of ordered pairs ($x_i$, $x_j$). The total loss is: 
+$$
+L = \sum_{i < j} - y_{ij} \log P(i > j) - (1 - y_{ij}) \log (1 - P(i > j))
+$$
+Where $y_ij$ is 1 if $x_i$ is ranked higher than $y_j$, 0 if $x_i$ is ranked lower than $y_j$ (here we will assume no $x_i$ can have the same ranking as $x_j$ if i is not equal to j). $ P(i > j) = \frac{1}{1 + e^{-(s(x_i) - s(x_j))}} $ is the probability that $ x_i $ is ranked higher than $ x_j $. s() is the rankning score assigned to i, higher s higher ranking. 
 
 
 Over the past 30 years, advancements in society and technology have significantly reduced global mortality rates, particularly for children under the age of five (child mortality). The child mortality rate declined from 93 deaths per 1,000 live births in 1990 to 37 deaths per 1,000 live births in 2022 [@worldbank2024M]. This progress represents millions of children who now have better chances of survival, marking a substantial achievement in global health.
