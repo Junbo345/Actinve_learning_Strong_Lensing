@@ -30,7 +30,13 @@ library(rstanarm)
 
 # Introduction
 
-Strong lensing occurs when a massive foreground object, such as a galaxy cluster, bends light from a more distant source, producing distinctive arcs or rings in images. Despite their significance for cosmology, these events are extremely rare, making up only a small fraction of astronomical observations. Traditional supervised learning methods require large quantities of labeled data, which is infeasible in this context. The primary challenge, therefore, is to develop a system capable of identifying potential lensing candidates with minimal labeled data.
+Strong lensing occurs when a massive foreground object, such as a galaxy cluster, bends light from a more distant source, producing distinctive arcs or rings in images. Despite their significance for cosmology, these events are extremely rare, making up only a small fraction of astronomical observations. Traditional supervised learning methods require large quantities of labeled data, which is unfeasible in this context. The primary challenge, therefore, is to develop a system capable of identifying potential lensing candidates with minimal labeled data.
+
+Thus we will use the state of art active learning strategy, BADGE, which aim to selects the most informative data points for human annotation and thus would improve training efficiency of the Machine Learning model [@cite]. This strategy have already had promising outcomes in many lacking labeled classification tasks and is of the most effective ways in active learning [@cite].
+
+However, we are still facing another problem which is the imbalanced data. the strong lensing ones in our dataset only consists 8% of the total data. And thus will make the evaluation and traing very trick. So we will incorporate better evaluating metrics and training loss.
+
+The remainder of this paper is organized as follows. @sec-method describes possible losses functions we incorporate into our model. @sec-metric introduces the new metrics we incorporated @sec-results presents the results of new losses and evaluation metric. Finally, @sec-diss discusses the implications of the findings, the limitations of the study, and recommendations for future research in finding strong lensing data.
 
 
 
