@@ -30,6 +30,10 @@ library(rstanarm)
 
 # Introduction
 
+Strong lensing occurs when a massive foreground object, such as a galaxy cluster, bends light from a more distant source, producing distinctive arcs or rings in images. Despite their significance for cosmology, these events are extremely rare, making up only a small fraction of astronomical observations. Traditional supervised learning methods require large quantities of labeled data, which is infeasible in this context. The primary challenge, therefore, is to develop a system capable of identifying potential lensing candidates with minimal labeled data.
+
+
+
 Over the past 30 years, advancements in society and technology have significantly reduced global mortality rates, particularly for children under the age of five (child mortality). The child mortality rate declined from 93 deaths per 1,000 live births in 1990 to 37 deaths per 1,000 live births in 2022 [@worldbank2024M]. This progress represents millions of children who now have better chances of survival, marking a substantial achievement in global health.
 
 Despite this progress, the pace of reduction has slowed considerably since 2015, decreasing from an annual rate of 3.8% during the Millennium Development Goal (MDG) era (2000–2015) to 2.1% during the Sustainable Development Goal (SDG) era (2015–2022) [@unicef2022underfive]. In 2022 alone, 4.9 million children under the age of five died, equating to approximately 13,400 deaths per day [@unicef2022underfive]. Moreover, the distribution of mortality rates under five remains highly uneven. Developed countries such as Canada and the United States report mortality rates as low as 10 per 1,000 live births while developing nations—particularly in sub-Saharan Africa—experience rates exceeding 100 per 1,000 live births [@worldbank2024M]. This stark disparity underscores the urgent need for targeted interventions in high-mortality regions.
