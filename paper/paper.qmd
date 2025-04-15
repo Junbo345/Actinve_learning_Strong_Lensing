@@ -44,7 +44,7 @@ To test the new metric and loss functions, we use the available strong lensing d
 
 ## New loss function
 
-Here we will investigate two loss functions, ranknet loss and focal loss. Ranknet loss is sepcified as follow: Given training data $x_1$, $x_2$, .... , $x_n$, and their rankings, $y_1$, $y_2$, ..., $y_n$, we will investigate all combinations of ordered pairs ($x_i$, $x_j$). The total loss is: 
+Here we will investigate two loss functions, ranknet loss and focal loss. Ranknet loss is sepcified as follow: Given training data $x_1$, $x_2$, .... , $x_n$, and their rankings, $y_1$, $y_2$, ..., $y_n$, we will investigate all combinations of ordered pairs ($x_i$, $x_j$) where their labels $y_i$ and $y_j$ are different. The total loss is: 
 $$
 L = \sum_{i < j} - y_{ij} \log P(i > j) - (1 - y_{ij}) \log (1 - P(i > j))
 $$
@@ -63,6 +63,8 @@ Despite the fact that we need new loss functions, we also need new evaluation me
 Thus we will propose a practical and better to understand metric, which is the # of correct labels in the top 10% of the highest ranked data. This is more to common sense and align the final purpose of our research.
 
 # Results
+
+To test the two loss functions useing the new metric we build a one layer neuronetwork with 40 input neurons, 128 hidden neurons and one output which is the score of the input data in pytorch. We split the dataset into training and testing parts with the ratio of 7:3. To gain efficiency in training, we split the training data into minibatches of size 128 and after finetuning set the training epohs be 100 to avoid overtraining. We also used a neuronet work with crossentropy loss as a conterpart. We ran 10 independent groups and the result is the following:
 
 
 
