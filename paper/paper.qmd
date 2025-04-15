@@ -113,7 +113,17 @@ ggplot(summary_df, aes(x = Model, y = Mean, fill = Model)) +
 
 ```
 
+@fig-mor1 show the performance of two new proposed loss functions compared to crossentropy loss. They are evaluated based on average number of correct labels in the top 100 labels predicted by the neuronetwork, roughly 10% of all the testing data. The performace of three losses are quite th same, centered around 40 labels. We see that rank loss does not outperform crossentropy loss while focal loss did but there is no promising beatens since the error bars contain each other's mean.
 
+# Dsicussion
+
+## Conslusion and limitation
+
+To our experiment, we see that the Focal loss would be the best choice, but in reality it will requires more computational complexity in training and espically in BADGE where we need to find the gredient wrt the second last layer of the neuronet work. With cross entropy, the gredient has a nice closed form, which is ... However, using focal loss the gredient is much mroe computational cost than cross entropy becasue of the $a_t$ and $\gamma$ term added. Thus we still need to either finetuning the hyperparameters of the loss to improve its performance. As for ranknet loss, since we need the labels of two diff data be diff, and the case is very rare in each batch and thus will result some training batches yeild non pairs. 
+
+## Future work
+
+Although we encountered certain limitations during the project, our findings open the door to several promising avenues for future work. These include fine-tuning the CNN feature extractor that supplies input to our model, enhancing the loss function or exploring alternative ranking approaches, and refining the evaluation criteria to better align with real-world requirements. Additionally, incorporating active learning strategies to gather more labeled data could significantly improve model performance and generalizability.
 
 
 Over the past 30 years, advancements in society and technology have significantly reduced global mortality rates, particularly for children under the age of five (child mortality). The child mortality rate declined from 93 deaths per 1,000 live births in 1990 to 37 deaths per 1,000 live births in 2022 [@worldbank2024M]. This progress represents millions of children who now have better chances of survival, marking a substantial achievement in global health.
