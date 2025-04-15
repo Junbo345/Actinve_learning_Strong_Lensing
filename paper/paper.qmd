@@ -48,7 +48,24 @@ Here we will investigate two loss functions, ranknet loss and focal loss. Rankne
 $$
 L = \sum_{i < j} - y_{ij} \log P(i > j) - (1 - y_{ij}) \log (1 - P(i > j))
 $$
-Where $y_ij$ is 1 if $x_i$ is ranked higher than $y_j$, 0 if $x_i$ is ranked lower than $y_j$ (here we will assume no $x_i$ can have the same ranking as $x_j$ if i is not equal to j). $P(i > j) = \frac{1}{1 + e^{-(s(x_i) - s(x_j))}}$ is the probability that $x_i$ is ranked higher than $x_j$. s() is the rankning score assigned to i, higher ranking cores means higher ranking. This loss aims to peanalize the pairs of data $x_i$ and $x_j$ where $x_i$ should be ranked higher than $x_j$ but instead $x_i$ is ranked lower by the model for $x_j$.   
+Where $y_ij$ is 1 if $x_i$ is ranked higher than $y_j$, 0 if $x_i$ is ranked lower than $y_j$ (here we will assume no $x_i$ can have the same ranking as $x_j$ if i is not equal to j). $P(i > j) = \frac{1}{1 + e^{-(s(x_i) - s(x_j))}}$ is the probability that $x_i$ is ranked higher than $x_j$. s() is the rankning score assigned to i, higher ranking cores means higher ranking. This loss aims to peanalize the pairs of data $x_i$ and $x_j$ where $x_i$ should be ranked higher than $x_j$ but instead $x_i$ is ranked lower by the model for $x_j$.
+
+The focal loss is specified as follows: 
+$$
+FL(p_t) = -\alpha_t (1-p_t)^\gamma \log(p_t)
+$$
+Here $p_t$ is the model's predicted probility if the true label is strong lensing, one minus the predicted probbility if the true label is not strong lenseing. $a_t$ is 0.75 if the true lavel is strong lensing and 0.25 if the true label is not strong lensing. The aim of this loss function is to avoid easy labels and penalize the model most if it incorrectly label a strong lensing one as non-lensing.
+
+## New evaluating matrics
+
+Despite the fact that we need new loss functions, we also need new evaluation metrics to better evaluate the performance of model on biased labels. As said, the labels of strong is very rare relative to non lensing. So if we use the default prediction accuracy then by just predicting everything by strong lensing the model will get a very decent performance while did not contribute much to the final goal of our research purpose.
+
+Thus we will propose a practical and better to understand metric, which is the # of correct labels in the top 10% of the highest ranked data. This is more to common sense and align the final purpose of our research.
+
+# Results
+
+
+
 
 
 Over the past 30 years, advancements in society and technology have significantly reduced global mortality rates, particularly for children under the age of five (child mortality). The child mortality rate declined from 93 deaths per 1,000 live births in 1990 to 37 deaths per 1,000 live births in 2022 [@worldbank2024M]. This progress represents millions of children who now have better chances of survival, marking a substantial achievement in global health.
