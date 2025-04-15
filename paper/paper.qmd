@@ -1,8 +1,11 @@
 ---
 title: "Improving Strong Gravitational Lensing Detection with Active Learning and Tailored Loss Functions Under Data Scarcity"
 author: 
-  - Junbo Li
-  - Supervisor: Gwendolyn Eadie, Mike Walmsley
+  - name: "Junbo Li"
+  - name: "Gwendolyn Eadie"
+    role: "Supervisor"
+  - name: "Mike Walmsley"
+    role: "Supervisor"
 thanks: "Code and data are available at: [https://github.com/Junbo345/Actinve_learning_Strong_Lensing](https://github.com/Junbo345/Actinve_learning_Strong_Lensing)."
 date: today
 date-format: long
@@ -36,7 +39,7 @@ To overcome this challenge, we adopt a state-of-the-art active learning strategy
 
 Despite this, we still face a significant issue: class imbalance. In our dataset, strong lensing instances represent only about 8% of the total data. This imbalance poses difficulties for both model training and evaluation. To address this, we integrate loss functions and evaluation metrics specifically designed for imbalanced classification tasks.
 
-The remainder of this paper is structured as follows: Section @sec-method outlines our approach, including the active learning framework, loss functions, and evaluation metrics used. Section @sec-results presents the performance results under the proposed method. Finally, Section @sec-diss discusses the implications of our findings, current limitations, and directions for future research in detecting strong lensing events.
+The remainder of this paper is structured as follows: Section @sec-method outlines our approach, including the active learning framework, loss functions, and evaluation metrics used. Section @sec-results presents the performance results under the proposed method. Finally, Section @sec-discussion discusses the implications of our findings, current limitations, and directions for future research in detecting strong lensing events.
 
 # Method {#sec-method}
 
@@ -69,7 +72,7 @@ the number of correctly identified strong lensing samples within the top 10% of 
 
 This metric directly measures the model's ability to surface valuable candidates for human review and is more consistent with the real-world usage of the system—prioritizing rare but scientifically significant events for expert validation.
 
-# Results {#sec-Results}
+# Results {#sec-results}
 
 To evaluate the two proposed loss functions using the new metric, we built a simple neural network in PyTorch. The model architecture consists of an input layer with 40 neurons, one hidden layer with 128 neurons, and a single output neuron representing the predicted score of the input sample. The dataset was split into training and testing sets with a 7:3 ratio. To improve training efficiency, we used mini-batches of size 128 and set the number of training epochs to 100 to avoid overfitting based on preliminary fine-tuning.
 
