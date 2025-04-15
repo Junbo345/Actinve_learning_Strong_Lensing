@@ -1,12 +1,12 @@
 ---
-title: "Exploring Determinants of Child Mortality Globally (2022): The Role of Vaccination, Healthcare Spending, and Nutrition"
-subtitle: "Findings Reveal Vaccination and Healthcare Spending as Key Drivers of Mortality Reduction"
+title: "Improving Strong Gravitational Lensing Detection with Active Learning and Tailored Loss Functions Under Data Scarcity"
 author: 
   - Junbo Li
+  - Supervisor: Gwendolyn Eadie, Mike Walmsley
 thanks: "Code and data are available at: [https://github.com/Junbo345/Mortality_analysis](https://github.com/Junbo345/Mortality_analysis)."
 date: today
 date-format: long
-abstract: "Child mortality has significantly decreased over the past three decades, but progress remains uneven across regions. This study examines the under-five mortality rates of 2022 for each country, focusing on the effects of DPT vaccination coverage, health expenditure per capita, and food production indices. Using a Bayesian multi-linear modeling approach, we found that increased vaccination coverage and healthcare spending significantly reduce child mortality, while food production had no direct impact. These findings underscore the need for targeted interventions in high-mortality regions, suggesting the importance of vaccination programs and healthcare funding in achieving global child survival goals."
+abstract: "Strong gravitational lensing is a rare yet critical phenomenon in astrophysics, offering insights into dark matter, galaxy evolution, and cosmology. However, its scarcity in observational data presents a significant challenge for machine learning models, particularly in supervised learning frameworks that rely on large amounts of labeled examples. In this study, we propose an approach that integrates active learning with specialized loss functions to improve the detection of strong lensing events under limited data conditions. We employ the BADGE active learning strategy to select the most informative samples for labeling and evaluate two custom loss functions—Focal Loss and RankNet Loss—against a baseline model using standard cross-entropy. Our experiments reveal that while Focal Loss shows modest improvements in surfacing true lensing candidates, its computational cost may limit practical application, especially in active learning contexts. RankNet Loss, on the other hand, suffers from pairing limitations due to class imbalance. We also introduce a more task-aligned evaluation metric based on the number of correctly identified lensing cases in the top 10% of ranked predictions. While no single method decisively outperforms the others, our results offer useful guidance for balancing performance and efficiency in rare-event classification problems and lay the groundwork for future enhancements through better feature learning, metric design, and data acquisition strategies."
 format: pdf
 number-sections: true
 bibliography: references.bib
@@ -32,7 +32,7 @@ library(rstanarm)
 
 Strong gravitational lensing occurs when a massive foreground object, such as a galaxy cluster, bends the light from a more distant source, producing distinctive arcs or rings in astronomical images. Although these phenomena are of great importance to cosmology, they are extremely rare—accounting for only a small fraction of all astronomical observations. Traditional supervised learning approaches typically require large amounts of labeled data, which is not feasible in this context due to the scarcity of strong lensing examples.
 
-To overcome this challenge, we adopt a state-of-the-art active learning strategy known as BADGE, which selects the most informative data points for human annotation. This method aims to improve training efficiency by prioritizing samples that are both uncertain and diverse [@cite]. BADGE has shown strong performance in other low-label settings and is recognized as one of the most effective techniques in active learning [@cite].
+To overcome this challenge, we adopt a state-of-the-art active learning strategy known as BADGE, which selects the most informative data points for human annotation. This method aims to improve training efficiency by prioritizing samples that are both uncertain and diverse [@ash2020deep]. BADGE has shown strong performance in other low-label settings and is recognized as one of the most effective techniques in active learning [@ash2020deep].
 
 Despite this, we still face a significant issue: class imbalance. In our dataset, strong lensing instances represent only about 8% of the total data. This imbalance poses difficulties for both model training and evaluation. To address this, we integrate loss functions and evaluation metrics specifically designed for imbalanced classification tasks.
 
