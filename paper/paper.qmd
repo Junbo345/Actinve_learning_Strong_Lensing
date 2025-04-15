@@ -66,6 +66,52 @@ Thus we will propose a practical and better to understand metric, which is the #
 
 To test the two loss functions useing the new metric we build a one layer neuronetwork with 40 input neurons, 128 hidden neurons and one output which is the score of the input data in pytorch. We split the dataset into training and testing parts with the ratio of 7:3. To gain efficiency in training, we split the training data into minibatches of size 128 and after finetuning set the training epohs be 100 to avoid overtraining. We also used a neuronet work with crossentropy loss as a conterpart. We ran 10 independent groups and the result is the following:
 
+```{r}
+#| label: fig-mor1
+#| fig-cap: "Performance of two new proposed loss functions compared to crossentropy loss. They are evaluated based on number of correct labels in the top 100 labels predicted by the neuronetwork, roughly 10% of all the testing data. We see that rank loss does not outperform crossentropy loss while focal loss did but there is no promising beatens since the error bars contain each other's mean." 
+#| echo: false
+#| warning: false
+#| message: false
+# Load required libraries
+library(ggplot2)
+library(dplyr)
+
+# Define data
+mlp <- c(36, 34, 38, 40, 44, 39, 42, 37, 40, 42)
+ranknet <- c(34, 35, 33, 40, 44, 40, 44, 39, 42, 37)
+focal <- c(35, 38, 39, 41, 41, 40, 50, 40, 43, 41)
+
+# Create a data frame
+df <- data.frame(
+  Model = rep(c("MLP", "RankNet", "Focal Loss"), each = 10),
+  Correct = c(mlp, ranknet, focal)
+)
+
+# Summarize: compute means and standard deviations
+summary_df <- df %>%
+  group_by(Model) %>%
+  summarise(
+    Mean = mean(Correct),
+    SD = sd(Correct)
+  )
+
+# Plot
+ggplot(summary_df, aes(x = Model, y = Mean, fill = Model)) +
+  geom_bar(stat = "identity", width = 0.6, color = "black") +
+  geom_errorbar(aes(ymin = Mean - SD, ymax = Mean + SD), width = 0.2) +
+  geom_text(aes(label = round(Mean, 1)), vjust = -0.5, size = 5) +
+  labs(
+    title = "Performance of MLP, RankNet, and Focal Loss Models Across 10 Splits",
+    y = "Correct Predictions in Top 100",
+    x = ""
+  ) +
+  theme_minimal() +
+  theme(
+    legend.position = "none",
+    text = element_text(size = 14)
+  )
+
+```
 
 
 
