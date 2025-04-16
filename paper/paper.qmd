@@ -33,7 +33,7 @@ library(rstanarm)
 
 # Introduction
 
-Strong gravitational lensing occurs when a massive foreground object, such as a galaxy cluster, bends the light from a more distant source, producing distinctive arcs or rings in astronomical images. Although these phenomena are of great importance to cosmology, they are extremely rare—accounting for only a small fraction of all astronomical observations. Traditional supervised learning approaches typically require large amounts of labeled data, which is not feasible in this context due to the scarcity of strong lensing examples.
+Strong gravitational lensing occurs when a massive foreground object, such as a galaxy cluster, bends the light from a more distant source, producing distinctive arcs or rings in astronomical images [@2010_Treu]. Although these phenomena are of great importance to cosmology, they are extremely rare—accounting for only a small fraction of all astronomical observations [@suyu2024strong]. Traditional supervised learning approaches typically require large amounts of labeled data [@hsu2025leveraging], which is not feasible in this context due to the scarcity of strong lensing examples.
 
 To overcome this challenge, we adopt a state-of-the-art active learning strategy known as BADGE, which selects the most informative data points for human annotation. This method aims to improve training efficiency by prioritizing samples that are both uncertain and diverse [@ash2020deep]. BADGE has shown strong performance in other low-label settings and is recognized as one of the most effective techniques in active learning [@ash2020deep].
 
@@ -43,7 +43,7 @@ The remainder of this paper is structured as follows: Section @sec-method outlin
 
 # Method {#sec-method}
 
-To evaluate the effectiveness of the proposed loss functions and evaluation metric, we use available strong lensing data in a regression framework. Features are first extracted using a convolutional neural network (CNN), and then concatenated with expert-provided labels for training. The resulting dataset contains approximately ~ total samples, with ~ representing strong lensing cases.
+To evaluate the effectiveness of the proposed loss functions and evaluation metric, we use available strong lensing data in a regression framework. Features are first extracted using a convolutional neural network (CNN), and then concatenated with expert-provided labels for training. The resulting dataset contains approximately 3329 total samples, with 255 representing strong lensing cases.
 
 ## New loss function
 
